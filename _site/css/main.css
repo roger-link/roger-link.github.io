@@ -1,0 +1,87 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+@import url(http://fonts.googleapis.com/css?family=Doppio+One);
+
+a {
+	text-decoration: none;
+	color: #000000;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+a img {
+	border: 0px;
+}
+
+img.post-image {
+	margin-bottom: 5px;
+	width: 250px;
+	height: 250px;
+}
+
+.post { 
+  margin: 20px 20px 20px 10px;
+	width: 250px;
+	float: left;
+	opacity: 1;
+}
+
+.post:hover {
+	opacity: 0.6;
+}
+
+.post-title {
+	font-size: 13px;
+	margin-top: 4px;
+	margin-bottom: 3px;
+}
+
+.post-title span {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.post-content {
+	text-align: left;
+}
+
+.post-summary {
+	color: #afafaf;
+	font-size: 12px;
+}
+
+#page-title {
+	margin-top: 0px;
+	padding-top: 0px;
+	font-size: 30px;
+}
+
+#header-container {
+ text-align: center;
+ margin-bottom: 4px;
+}
+
+/*#footer {
+	margin: 30px 0px 0px 0px;
+	padding: 10px 0px 10px 0px;
+	border-top: 1px solid #dddddd;
+	text-align: center;
+	font-size: 13px;
+	background: #fff;
+}*/
+
+#content {
+  margin: 0px 5% 0px ;
+  border-color: #EEEEEE;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-top-style: solid;
+  border-top-width: 1px;
+}
+
+/*.item { width: 20%; }*/
+
+opacity: 0.6;
+
+

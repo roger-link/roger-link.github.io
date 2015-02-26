@@ -1,0 +1,37 @@
+<html>
+	<head>
+		<meta name="viewport" id="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" type="text/css" href="/css/main.css">
+		<link href="/blog/rss.xml" rel="alternate" type="application/rss+xml" title="{{site.blog_title}}" />
+		<title>{{site.blog_title}}</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<script type="text/javascript" src='/js/jquery.min.js'></script>
+		<script src="/js/masonry.pkgd.min.js"></script>
+	</head>
+	<body>
+		{% include header.html %}
+		<div id="container" class="js-masonry" data-masonry-options='{ "columnWidth": 100, "itemSelector": ".item" }'>
+				<ul>
+					{% for post in site.categories.blog %}
+					<div class="item">
+						<li class='post'>
+							{% if post.image %}
+								<a href='{{post.url}}'><img class='post-image' src="{{post.image}}" /></a>
+							{% endif %}
+							<div class="post-content">
+								<div class="post-title">
+				        	<a href='{{post.url}}'>{{post.title}}</a>
+				        </div>
+								<div class="post-summary">{{post.summary}}</div>
+							</div>
+						</li>
+					</div>
+					{% endfor %}
+				</ul>
+			<div style='clear:both'></div>
+		</div>
+<!-- 		<div id='footer'>
+			{{site.full_name}} - {{site.copyright_year}}
+		</div> -->
+	</div>
+</body>
+</html>
