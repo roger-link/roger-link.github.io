@@ -1,4 +1,3 @@
-{% include header.html %}
     <div id="container" class="js-masonry" data-masonry-options='{ "columnWidth": 100, "itemSelector": ".item" }'>
         <ul>
           {% for post in site.categories.blog %}
@@ -9,9 +8,9 @@
               {% endif %}
               <div class="post-content">
                 <div class="post-title">
-                  <a href='{{post.url}}'>{{post.title}}</a>
+                  <a href='{{post.url}}'><span class="VegurResumeHeader">{{post.title}}</span></a>
                 </div>
-                <div class="post-summary">{{post.summary}}</div>
+                <div class="post-summary"><span class="VegurResumeText">{{post.summary}}</span></div>
               </div>
             </li>
           </div>
