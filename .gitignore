@@ -47,3 +47,4 @@ boilerplate/
 
 .DS_Store
 
+_site/*
