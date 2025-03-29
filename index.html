@@ -22,19 +22,14 @@
       position: relative;
     }
 
-    .portal, .portal-next {
+    .portal {
       position: absolute;
       width: 200vmax;
       height: 200vmax;
-      background: radial-gradient(circle at center, #c6b4f0, #120033 60%);
+      background: radial-gradient(circle at center, hsl(0, 100%, 80%), hsl(0, 100%, 10%) 60%);
       transform: scale(1.1);
       filter: blur(120px);
-      transition: opacity 8s ease-in-out, background 8s ease-in-out;
       z-index: 0;
-    }
-
-    .portal-next {
-      z-index: -1;
     }
 
     .mist-layer {
@@ -70,9 +65,8 @@
       100% { transform: translate(-3%, 4%) scale(1.1); }
     }
 
-    .name {
+    /* .name {
       z-index: 2;
-      color: #e8d6ff;
       font-size: 7vw;
       font-weight: 600;
       letter-spacing: -0.01em;
@@ -84,11 +78,111 @@
         0 0 8px rgba(255, 255, 255, 0.3),
         0 0 16px rgba(255, 255, 255, 0.2),
         0 0 40px rgba(255, 255, 255, 0.15);
+    } */
+
+    .name {
+      z-index: 2;
+      font-size: 7vw;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      text-align: center;
+      opacity: 0;
+      animation: fadeText 12s ease-in-out infinite;
+      text-shadow: none; /* temporarily remove glow */
     }
+
+    .name {
+  text-shadow:
+    0 0 1px rgba(255, 255, 255, 0.2),
+    0 1px 2px rgba(0, 0, 0, 0.25);
+}
 
     @keyframes fadeText {
       0%, 100% { opacity: 0.2; }
       50% { opacity: 1; }
+    }
+
+    .name::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 120%;
+      height: 120%;
+      border-radius: 50%;
+      background: radial-gradient(circle, currentColor 10%, transparent 70%);
+      opacity: 0.15;
+      animation: auraPulse 4s ease-in-out infinite;
+      z-index: -1;
+    }
+    .glass-layer {
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at center, rgba(255, 255, 255, 0.03), transparent 80%);
+      mix-blend-mode: screen;
+      filter: blur(100px);
+      animation: glassDrift 60s ease-in-out infinite;
+      z-index: 0.5;
+    }
+
+    .glass-layer:nth-child(2) {
+      animation-direction: reverse;
+      background: radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.02), transparent 85%);
+      animation-duration: 90s;
+    }
+
+        @keyframes glassDrift {
+      0% { transform: translate(0%, 0%) scale(1); }
+      50% { transform: translate(3%, -3%) scale(1.02); }
+      100% { transform: translate(-2%, 2%) scale(1); }
+    }
+
+    /* @keyframes nameBlur {
+  0%, 100% { filter: blur(0px); }
+  50% { filter: blur(1.2px); }
+}
+.name {
+  animation: fadeText 2s ease-in-out infinite, nameBlur 3s ease-in-out infinite;
+} */
+
+
+.name {
+  animation: fadeText 12s ease-in-out infinite,
+             depthPulse 16s ease-in-out infinite;
+  transform-origin: center;
+}
+/* @keyframes depthPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.01); }
+} */
+
+    .name {
+      animation: fadeText 12s ease-in-out infinite, depthPulse 6s ease-in-out infinite;
+    }
+
+    .fog {
+      position: absolute;
+      top: 0; left: 0;
+      width: 300%;
+      height: 300%;
+      background: url('fog.png') repeat;
+      opacity: 0.04;
+      mix-blend-mode: screen;
+      animation: fogSpin 120s linear infinite;
+      pointer-events: none;
+    }
+
+@keyframes fogSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+    @keyframes auraPulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.1; }
+      50% { transform: translate(-50%, -50%) scale(1.15); opacity: 0.25; }
     }
 
     .nav {
@@ -120,7 +214,7 @@
       left: 0;
       height: 100%;
       width: 100%;
-      background: rgba(0, 0, 0, 0.92);
+      background: rgba(0, 0, 0, 0.5);
       overflow-y: auto;
       z-index: 5;
       padding: 60px 5vw 40px;
@@ -185,7 +279,6 @@
 <body>
 <div class="lightbox" id="lightbox"><img src="" alt=""></div>
 <div class="portal" id="portal"></div>
-<div class="portal-next" id="portalNext"></div>
 <div class="mist-layer"></div>
 <div class="mist-layer"></div>
 <div class="mist-layer"></div>
@@ -203,38 +296,53 @@
   </div>
 </div>
 <script>
+
+
+  let hue = Math.floor(Math.random() * 360);
+  let isPortfolioOpen = false;
+
+
   const portal = document.getElementById('portal');
-  const portalNext = document.getElementById('portalNext');
-  const gradients = [
-  ['#ffe6fa', '#330033'], // ← brighter starting gradient
-  ['#c6b4f0', '#120033'],
-  ['#ff00f7', '#00001a'],
-  ['#00ffe7', '#000033'],
-  ['#ffd6e0', '#2f0050'],
-  ['#fffcdc', '#110020'],
-  ['#ffffff', '#1a0033']
-];
-  let current = Math.floor(Math.random() * gradients.length);
-  function fadeToNextGradient() {
-    const [start, end] = gradients[(current + 1) % gradients.length];
-    portalNext.style.background = `radial-gradient(circle at center, ${start}, ${end} 60%)`;
-    portal.style.opacity = 0;
-    portalNext.style.opacity = 1;
-    setTimeout(() => {
-      portal.style.background = portalNext.style.background;
-      portal.style.opacity = 1;
-      portalNext.style.opacity = 0;
-      current = (current + 1) % gradients.length;
-    }, 8000);
+  const nameText = document.querySelector('.name');
+  // const portfolio = document.getElementById('portfolio');
+  showPortfolio.addEventListener('click', (e) => {
+  e.preventDefault();
+  portfolio.style.display = 'block';
+  portal.style.display = 'none'; // 🔒 Hide background morph
+});
+
+closePortfolio.addEventListener('click', () => {
+  portfolio.style.display = 'none';
+  portal.style.display = 'block'; // ✅ Restore background morph
+});
+
+  function updateHue() {
+  if (portfolio.style.display !== 'block') {
+    hue = (hue + 1) % 360;
+    const bgHue = hue;
+    const textHue = (hue + 180) % 360;
+
+    const startColor = `hsl(${bgHue}, 100%, 80%)`;
+    const endColor = `hsl(${bgHue}, 100%, 10%)`;
+    const textColor = `hsl(${textHue}, 100%, 40%)`;
+    portal.style.background = `radial-gradient(circle at center, ${startColor}, ${endColor} 60%)`;
+    nameText.style.color = textColor;
   }
-  const [initStart, initEnd] = gradients[0];
-  portal.style.background = `radial-gradient(circle at center, ${initStart}, ${initEnd} 60%)`;
-  portalNext.style.background = `radial-gradient(circle at center, ${initStart}, ${initEnd} 60%)`;
-  setInterval(fadeToNextGradient, 12000);
+}
+
+  setInterval(updateHue, 100);
 
   const portfolio = document.getElementById('portfolio');
-  const showPortfolio = document.getElementById('showPortfolio');
-  const closePortfolio = document.getElementById('closePortfolio');
+  showPortfolio.addEventListener('click', (e) => {
+  e.preventDefault();
+  portfolio.style.display = 'block';
+  isPortfolioOpen = true;
+});
+
+closePortfolio.addEventListener('click', () => {
+  portfolio.style.display = 'none';
+  isPortfolioOpen = false;
+});
   showPortfolio.addEventListener('click', (e) => {
     e.preventDefault();
     portfolio.style.display = 'block';
@@ -244,85 +352,85 @@
   });
 
   const images = [
-    "images/stuart.jpg",
-    "images/lindsay.jpg",
-    "images/natalie.jpg",
-    "images/brandon.jpg",
-    "images/anji_cover.jpg",
-    "images/ariel.jpg",
-    "images/back_angelfuck.jpg",
-    "images/dbcoopers_wall.jpg",
-    "images/front_angelfuck.jpg",
-    "images/haefke3.jpg",
-    "images/66sean.png",
-    "images/aimix.jpg",
-    "images/asdf1.jpg",
-    "images/badtrip.jpg",
-    "images/balls.jpg",
-    "images/brightroom2.jpg",
-    "images/brightroomai.jpg",
-    "images/comiskey.jpg",
-    "images/comiskey2.jpg",
-    "images/conver3.jpg",
-    "images/dbcoopers_wall.jpg",
-    "images/dolly.jpg",
-    "images/drunk.jpg",
-    "images/DSCF1004.jpg",
-    "images/einstein.jpg",
-    "images/fight.jpg",
-    "images/fight2.jpg",
-    "images/fight4.jpg",
-    "images/fight5.jpg",
-    "images/hand.jpg",
-    "images/icecreamhair.jpg",
-    "images/install1.jpeg",
-    "images/install2.jpeg",
-    "images/install3.jpeg",
-    "images/intangible2.jpg",
-    "images/jaimie.jpg",
-    "images/jaimieme.jpg",
-    "images/jason.jpg",
-    "images/jonny.jpg",
-    "images/jonnyghost.jpg",
-    "images/jtruck.jpg",
-    "images/kim.jpg",
-    "images/kim2.jpg",
-    "images/knife.jpg",
-    "images/many.jpg",
-    "images/me.jpg",
-    "images/me3.jpg",
-    "images/mewithwdd.jpg",
-    "images/orgy.jpg",
-    "images/phil2.png",
-    "images/phil3.png",
-    "images/phillip.png",
-    "images/plateroom.jpg",
-    "images/polaroids.jpg",
-    "images/pornhub.jpg",
-    "images/portland1.jpg",
-    "images/portland2.jpg",
-    "images/portland3.jpg",
-    "images/room3.jpg",
-    "images/room4.jpg",
-    "images/rule.jpg",
-    "images/sean.png",
-    "images/shoes2.jpg",
-    "images/skatedog.jpg",
-    "images/spooktacular.jpg",
-    "images/tba.jpg",
-    "images/teeth.jpg",
-    "images/tennis.jpg",
-    "images/trees.jpg",
-    "images/trump.jpg",
-    "images/vampires.jpg",
-    "images/wallpater.png",
-    "images/wdd2.jpg",
-    "images/wddbaltimore.jpg",
-    "images/wish.gif",
-    "images/untitled34.png",
-    "images/untitled19.png",
-    "images/untitled31.png",
-  ];
+  "images/stuart.jpg",
+  "images/lindsay.jpg",
+  "images/natalie.jpg",
+  "images/brandon.jpg",
+  "images/anji_cover.jpg",
+  "images/ariel.jpg",
+  "images/back_angelfuck.jpg",
+  "images/dbcoopers_wall.jpg",
+  "images/front_angelfuck.jpg",
+  "images/haefke3.jpg",
+  "images/66sean.png",
+  "images/aimix.JPG",
+  "images/asdf1.JPG",
+  "images/badtrip.JPG",
+  "images/balls.jpg",
+  "images/brightroom2.JPG",
+  "images/brightroomai.JPG",
+  "images/comiskey.jpg",
+  "images/comiskey2.jpg",
+  "images/conver3.jpg",
+  "images/dolly.JPG",
+  "images/drunk.jpg",
+  "images/DSCF1004.JPG",
+  "images/einstein.jpg",
+  "images/fight.jpg",
+  "images/fight2.jpg",
+  "images/fight4.jpg",
+  "images/fight5.jpg",
+  "images/hand.jpg",
+  "images/icecreamhair.jpg",
+  "images/install1.jpeg",
+  "images/install2.jpeg",
+  "images/install3.jpeg",
+  "images/intangible2.jpg",
+  "images/jaimie.jpg",
+  "images/jaimieme.jpg",
+  "images/jason.jpg",
+  "images/jonny.jpg",
+  "images/jonnyghost.jpg",
+  "images/jtruck.jpg",
+  "images/kim.jpg",
+  "images/kim2.JPG",
+  "images/knife.jpg",
+  "images/many.jpg",
+  "images/me.jpg",
+  "images/me3.jpg",
+  "images/mewithwdd.jpg",
+  "images/orgy.jpg",
+  "images/phil2.png",
+  "images/phil3.png",
+  "images/phillip.png",
+  "images/pizza.PNG",
+  "images/plateroom.JPG",
+  "images/polaroids.jpg",
+  "images/pornhub.JPG",
+  "images/portland1.jpg",
+  "images/portland2.jpg",
+  "images/portland3.jpg",
+  "images/room3.JPG",
+  "images/room4.JPG",
+  "images/rule.jpg",
+  "images/sean.png",
+  "images/shoes2.jpg",
+  "images/skatedog.jpg",
+  "images/spooktacular.jpg",
+  "images/tba.JPG",
+  "images/teeth.JPG",
+  "images/tennis.jpg",
+  "images/trees.jpg",
+  "images/trump.JPG",
+  "images/vampires.JPG",
+  "images/wallpater.PNG",
+  "images/wdd2.JPG",
+  "images/wddbaltimore.jpg",
+  "images/wish.gif",
+  "images/untitled34.png",
+  "images/untitled19.png",
+  "images/untitled31.png"
+];
   const imageGrid = document.getElementById('imageGrid');
   const shuffled = images.sort(() => Math.random() - 0.5);
   shuffled.forEach(src => {
