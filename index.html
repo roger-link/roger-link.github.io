@@ -1,201 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Roger Link</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet"/>
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      overflow: hidden;
-      background: black;
-      font-family: 'Space Grotesk', sans-serif;
-    }
-
-    .name {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 7vw;
-      font-weight: 600;
-      text-align: center;
-      color: white;
-      animation: none;
-      text-shadow: 0 0 1px rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.25);
-      transform-origin: center;
-      z-index: 3;
-    }
-
-
-      50% { opacity: 1; }
-    }
-
-    @keyframes depthPulse {
-      0%, 100% { transform: translate(-50%, -50%) scale(1); }
-      50% { transform: translate(-50%, -50%) scale(1.01); }
-    }
+    html, body { margin:0; padding:0; height:100%; overflow:hidden; background:#000; font-family:'Space Grotesk',sans-serif; }
+    .name { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:7vw; font-weight:600; color:#fff; z-index:3; text-shadow:0 0 1px rgba(255,255,255,.2),0 1px 2px rgba(0,0,0,.25); }
 
     .nav {
-      position: fixed;
-      top: 20px;
-      right: 30px;
-      z-index: 4;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      justify-content: flex-end;
+      position:fixed;
+      top:20px;
+      right:30px;
+      z-index:4;
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
     }
 
     .nav a {
-      color: #e8d6ff;
-      font-size: 1em;
-      text-decoration: none;
-      padding: 6px 12px;
-      background: rgba(0, 0, 0, 0.3);
-      border-radius: 4px;
-      transition: background 0.3s ease;
+      color:#e8d6ff;
+      text-decoration:none;
+      padding:6px 12px;
+      background:rgba(0,0,0,.3);
+      border-radius:4px;
+      transition:background .3s ease;
     }
 
     .nav a:hover {
-      background: rgba(255, 255, 255, 0.1);
+      background:rgba(255,255,255,.1);
     }
 
-    .portfolio {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      overflow-y: auto;
-      z-index: 20;
-      padding: 60px 5vw 40px;
-      box-sizing: border-box;
+    @media (max-width: 600px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-end;
+        right: 15px;
+        top: 15px;
+        gap: 4px;
+      }
+
+      .nav a {
+        font-size: 0.9em;
+        padding: 4px 8px;
+      }
     }
 
-    .portfolio .close {
-      position: fixed;
-      top: 20px;
-      left: 30px;
-      font-size: 2em;
-      color: #e8d6ff;
-      cursor: pointer;
-      z-index: 21;
-    }
-
-    .portfolio h3 {
-      color: #e8d6ff;
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .image-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 20px;
-      max-width: 100%;
-      box-sizing: border-box;
-    }
-
-    .image-grid img {
-      width: 100%;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-      display: block;
-    }
-
-    .image-grid img:hover {
-      transform: scale(1.05);
-    }
-
-    .lightbox {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0,0,0,0.9);
-      z-index: 999;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .lightbox img {
-      max-width: 90vw;
-      max-height: 90vh;
-      border-radius: 12px;
-    }
-    .grid-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 0;
-  }
-
-  .shape {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    will-change: transform;
-  }
-
-  .abstract {
-    position: absolute;
-    background-blend-mode: overlay;
-    overflow: hidden;
-    transition: clip-path 6s ease-in-out;
-  }
-
-  .rotate {
-    animation: spin 180s linear infinite;
-  }
-
-  @keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-
-  .inner-shape {
-    position: absolute;
-    pointer-events: none;
-  }
-</style>
+    .portfolio { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,.9); overflow:auto; z-index:20; padding:60px 5vw 40px; }
+    .portfolio .close { position:fixed; top:20px; left:30px; font-size:2em; color:#e8d6ff; cursor:pointer; z-index:21; }
+    .portfolio h3 { color:#e8d6ff; text-align:center; margin-bottom:30px; }
+    .image-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:20px; }
+    .image-grid img { width:100%; border-radius:6px; cursor:pointer; transition:.3s; }
+    .image-grid img:hover { transform:scale(1.05); }
+    .lightbox { display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,.9); z-index:999; align-items:center; justify-content:center; }
+    .lightbox img { max-width:90vw; max-height:90vh; border-radius:12px; }
+    .shape { position:absolute; will-change:transform; }
+    .abstract { overflow:hidden; transition:clip-path 6s ease-in-out; }
+    .rotate { animation:spin 240s linear infinite; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .inner-shape { position:absolute; pointer-events:none; }
+  </style>
 </head>
 <body>
-  <div class="grid-bg" id="grid"></div>
-  <div class="name">Roger Link</div>
-  <div class="nav">
-    <a href="#" id="showPortfolio">Portfolio</a>
-    <a href="https://www.linkedin.com/in/rogerlink/" target="_blank" rel="noopener noreferrer">Resume</a>
-    <a href="https://cancelledfutures.bandcamp.com/album/asdf" target="_blank" rel="noopener noreferrer">Cancelled Futures</a>
-  </div>
-  <div class="lightbox" id="lightbox"><img src="" alt=""></div>
-  <div class="portfolio" id="portfolio">
-    <div class="close" id="closePortfolio">&times;</div>
-    <div class="portfolio-item">
-      <h3>Portfolio</h3>
-      <div class="image-grid" id="imageGrid"></div>
-    </div>
-  </div>
+<div class="grid-bg" id="grid"></div>
+<div class="name">Roger Link</div>
+<div class="nav">
+  <a href="#" id="showPortfolio">Portfolio</a>
+  <a href="https://www.linkedin.com/in/rogerlink/" target="_blank">Resume</a>
+  <a href="https://cancelledfutures.bandcamp.com/album/asdf" target="_blank">Cancelled Futures</a>
+</div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const showPortfolio = document.getElementById('showPortfolio');
-      const portfolio = document.getElementById('portfolio');
-      const closePortfolio = document.getElementById('closePortfolio');
-      const imageGrid = document.getElementById('imageGrid');
-      const lightbox = document.getElementById('lightbox');
-      const lightboxImg = lightbox.querySelector('img');
-      const images = [
+<div class="lightbox" id="lightbox"><img src="" alt=""></div>
+<div class="portfolio" id="portfolio">
+  <div class="close" id="closePortfolio">&times;</div>
+  <h3>Portfolio</h3>
+  <div class="image-grid" id="imageGrid"></div>
+</div>
+
+<script>
+document.getElementById('showPortfolio').onclick = e => {
+  e.preventDefault();
+  document.getElementById('portfolio').style.display = 'block';
+};
+document.getElementById('closePortfolio').onclick = () => {
+  document.getElementById('portfolio').style.display = 'none';
+};
+document.getElementById('lightbox').onclick = () => {
+  document.getElementById('lightbox').style.display = 'none';
+};
+
+const images = [
         "images/stuart.jpg",
         "images/lindsay.jpg",
         "images/natalie.jpg",
@@ -276,197 +171,102 @@
         "images/untitled31.png"
       ];
 
-      images.sort(() => Math.random() - 0.5).forEach(src => {
-        const img = document.createElement('img');
-        img.src = src;
-        img.alt = '';
-        img.addEventListener('click', () => {
-          lightboxImg.src = src;
-          lightbox.style.display = 'flex';
-        });
-        imageGrid.appendChild(img);
-      });
+images.forEach(src => {
+  const img = document.createElement('img');
+  img.src = src;
+  img.onclick = () => {
+    document.querySelector('#lightbox img').src = src;
+    document.getElementById('lightbox').style.display = 'flex';
+  };
+  document.getElementById('imageGrid').appendChild(img);
+});
 
-      showPortfolio.addEventListener('click', (e) => {
-        e.preventDefault();
-        portfolio.style.display = 'block';
-      });
+const grid = document.getElementById('grid'),
+      W = window.innerWidth,
+      H = window.innerHeight,
+      palette = ['#e63946','#f1a208','#ffb703','#fb8500','#43aa8b','#219ebc','#3a86ff','#8338ec','#ff006e','#d62828','#6a994e','#386641','#1d3557','#2a9d8f','#264653'];
 
-      closePortfolio.addEventListener('click', () => {
-        portfolio.style.display = 'none';
-      });
+function randomColor() {
+  return palette[Math.random() * palette.length | 0];
+}
 
-      lightbox.addEventListener('click', () => {
-        lightbox.style.display = 'none';
-        lightboxImg.src = '';
-      });
-    });
-      const grid = document.getElementById('grid');
-    const screenW = window.innerWidth;
-    const screenH = window.innerHeight;
+function polygonPath(sides) {
+  let p = '';
+  for (let j = 0; j < sides; j++) {
+    let a = 2 * Math.PI * j / sides, r = 45 + Math.random() * 10;
+    p += `${50 + Math.cos(a) * r}% ${50 + Math.sin(a) * r}%,`;
+  }
+  return `polygon(${p.slice(0, -1)})`;
+}
 
-    const palette = [
-      '#e63946', '#f1a208', '#ffb703', '#fb8500',
-      '#43aa8b', '#219ebc', '#3a86ff', '#8338ec',
-      '#ff006e', '#d62828', '#6a994e', '#386641',
-      '#1d3557', '#2a9d8f', '#264653'
-    ];
+function createShape() {
+  const w = document.createElement('div'); w.className = 'shape';
+  w.style.left = Math.random() * W + 'px'; w.style.top = Math.random() * H + 'px';
+  const s = document.createElement('div'); s.className = 'abstract';
+  const size = Math.random() < .1 ? 350 + Math.random() * 300 : 30 + Math.random() * 180;
+  s.style.width = s.style.height = size + 'px';
 
-    function randomColor() {
-      return palette[Math.floor(Math.random() * palette.length)];
+  s.style.background = Math.random() < .35
+    ? `repeating-linear-gradient(${Math.random() * 360}deg,${randomColor()} 0,${randomColor()} ${3 + Math.random() * 8}px,transparent ${8 + Math.random() * 12}px)`
+    : `${randomColor()}`;
+
+  const shapeTypeChance = Math.random();
+  if (shapeTypeChance < 0.33) {
+    s.style.clipPath = 'circle(50%)';
+    if (Math.random() < 0.4) s.style.border = `2px solid ${randomColor()}`;
+  } else if (shapeTypeChance < 0.66) {
+    s.style.clipPath = 'polygon(50% 0%,0% 100%,100% 100%)';
+  } else {
+    s.style.clipPath = 'none';
+    if (Math.random() < 0.4) s.style.border = `2px solid ${randomColor()}`;
+  }
+
+  if (Math.random() < .05) s.classList.add('rotate');
+
+  if (Math.random() < .07) {
+    for (let i = 0; i < 3 + Math.random() * 6 | 0; i++) {
+      const is = document.createElement('div'); is.className = 'inner-shape';
+      const isize = size * (.15 + .25 * Math.random());
+      is.style.width = is.style.height = isize + 'px'; is.style.background = randomColor();
+      is.style.left = Math.random() * 70 + '%'; is.style.top = Math.random() * 70 + '%';
+      s.appendChild(is);
     }
+  }
 
-    function generatePolygonPath(sides) {
-      let points = '';
-      for (let j = 0; j < sides; j++) {
-        const angle = (Math.PI * 2 * j) / sides;
-        const radius = 45 + Math.random() * 10;
-        const x = 50 + Math.cos(angle) * radius;
-        const y = 50 + Math.sin(angle) * radius;
-        points += `${x}% ${y}%, `;
-      }
-      return `polygon(${points.slice(0, -2)})`;
-    }
+  s.style.boxSizing = 'border-box';
 
-    function createShape() {
-      const wrapper = document.createElement('div');
-      wrapper.className = 'shape';
-      const x = Math.random() * screenW;
-      const y = Math.random() * screenH;
-      wrapper.style.left = `${x}px`;
-      wrapper.style.top = `${y}px`;
+  w.appendChild(s); grid.appendChild(w);
+  setTimeout(() => { w.style.transition = 'opacity 4s'; w.style.opacity = 0; }, 36000);
+  setTimeout(() => w.remove(), 40000);
 
-      const shape = document.createElement('div');
-      shape.className = 'abstract';
-      const size = Math.random() < 0.1 ? 300 + Math.random() * 330 : 30 + Math.random() * 200;
-      shape.style.width = `${size}px`;
-      shape.style.height = `${size}px`;
+  const freq = .3 + Math.random() * .5,
+        amp = 15 + Math.random() * 20,
+        ox = Math.random() * 1000,
+        oy = Math.random() * 1000;
 
-      const useStripes = Math.random() < 0.4;
-      const useBorder = Math.random() < 0.4;
-      const useInnerDots = Math.random() < 0.05;
-      const useRotation = Math.random() < 0.05;
-      const useMorph = Math.random() < 0.05;
+  (function animate() {
+    const t = performance.now() / 1000;
+    w.style.transform = `translate(${Math.sin(t * freq + ox) * amp}px,${Math.cos(t * freq + oy) * amp}px)`;
+    requestAnimationFrame(animate);
+  })();
+}
 
-      const baseColor = randomColor();
-      const stripeColor = randomColor();
-      const borderColor = randomColor();
+function createLine() {
+  const w = document.createElement('div'); w.className = 'shape';
+  w.style.left = Math.random() * W + 'px'; w.style.top = Math.random() * H + 'px';
+  w.style.transform = `rotate(${Math.random() * 360}deg)`;
+  const l = document.createElement('div');
+  l.style.width = 50 + Math.random() * 400 + 'px';
+  l.style.height = 1 + Math.random() * 8 + 'px';
+  l.style.background = randomColor();
+  w.appendChild(l); grid.appendChild(w);
+  setTimeout(() => w.remove(), 30000);
+}
 
-      if (useStripes) {
-        const stripeWidth = 4 + Math.floor(Math.random() * 6);
-        const angle = Math.floor(Math.random() * 360);
-        shape.style.background = `repeating-linear-gradient(${angle}deg, ${stripeColor}, ${stripeColor} ${stripeWidth}px, ${baseColor} ${stripeWidth}px, ${baseColor} ${stripeWidth * 2}px)`;
-      } else if (Math.random() < 0.1) {
-        shape.style.background = `
-          repeating-linear-gradient(45deg, ${randomColor()}, ${randomColor()} 6px, transparent 6px, transparent 12px),
-          repeating-linear-gradient(-45deg, ${randomColor()}, ${randomColor()} 6px, transparent 6px, transparent 12px),
-          ${baseColor}`;
-      } else {
-        shape.style.backgroundColor = baseColor;
-      }
-
-      if (useBorder) {
-        shape.style.border = `${1 + Math.floor(Math.random() * 3)}px solid ${borderColor}`;
-      }
-
-      const kind = Math.random();
-      if (useMorph) {
-        shape.style.clipPath = generatePolygonPath(Math.floor(4 + Math.random() * 6));
-        setInterval(() => {
-          shape.style.clipPath = generatePolygonPath(Math.floor(4 + Math.random() * 6));
-        }, 10000);
-      } else if (kind < 0.33) {
-        shape.style.borderRadius = '50%';
-      } else if (kind < 0.66) {
-        shape.style.clipPath = 'polygon(50% 0%, 0% 100%, 100% 100%)';
-      } else {
-        shape.style.borderRadius = '0';
-      }
-
-      if (useRotation) shape.classList.add('rotate');
-
-      if (useInnerDots) {
-        const count = 3 + Math.floor(Math.random() * 8);
-        for (let i = 0; i < count; i++) {
-          const dot = document.createElement('div');
-          dot.className = 'inner-shape';
-          const dotWidth = (Math.random() < 0.2 ? 1 + Math.random() * 2 : Math.random() < 0.5 ? 4 + Math.random() * 4 : 8 + Math.random() * 10);
-          dot.style.width = `${dotWidth}px`;
-          dot.style.height = `${Math.random() < 0.3 ? 1 + Math.random() * 2 : dotWidth}px`;
-          dot.style.borderRadius = Math.random() < 0.5 ? '50%' : '0';
-          dot.style.left = `${Math.random() * 100}%`;
-          dot.style.top = `${Math.random() * 100}%`;
-          dot.style.backgroundColor = randomColor();
-          shape.appendChild(dot);
-        }
-      }
-
-      if (Math.random() < 0.1) {
-        const inset = document.createElement('div');
-        inset.style.position = 'absolute';
-        inset.style.top = '20%';
-        inset.style.left = '20%';
-        inset.style.width = '60%';
-        inset.style.height = '60%';
-        inset.style.background = `repeating-linear-gradient(90deg, ${randomColor()}, ${randomColor()} 4px, transparent 4px, transparent 8px)`;
-        inset.style.mixBlendMode = 'screen';
-        shape.appendChild(inset);
-      }
-
-      wrapper.appendChild(shape);
-      grid.appendChild(wrapper);
-
-      wrapper.style.opacity = 1;
-      setTimeout(() => {
-        wrapper.style.transition = 'opacity 4s ease-out';
-        wrapper.style.opacity = 0;
-      }, 36000);
-
-      const freq = 0.5 + Math.random();
-      const amp = 10 + Math.random() * 20;
-      const offsetX = Math.random() * 1000;
-      const offsetY = Math.random() * 1000;
-
-      function animate() {
-        const t = performance.now() / 1000;
-        const dx = Math.sin(t * freq + offsetX) * amp;
-        const dy = Math.cos(t * freq + offsetY) * amp;
-        wrapper.style.transform = `translate(${dx}px, ${dy}px)`;
-        requestAnimationFrame(animate);
-      }
-      animate();
-
-      setTimeout(() => wrapper.remove(), 40000);
-    }
-
-    function createLine() {
-      const color = randomColor();
-      const wrapper = document.createElement('div');
-      wrapper.className = 'shape';
-      const x = Math.random() * screenW;
-      const y = Math.random() * screenH;
-      wrapper.style.left = `${x}px`;
-      wrapper.style.top = `${y}px`;
-      const angle = Math.random() * 360;
-      wrapper.style.transform = `rotate(${angle}deg)`;
-      wrapper.style.transformOrigin = 'left center';
-
-      const line = document.createElement('div');
-      line.style.width = `${50 + Math.random() * 400}px`;
-      line.style.height = `${(Math.random() < 0.2 ? 0.5 + Math.random() * 1 : Math.random() < 0.5 ? 2 + Math.random() * 2 : 5 + Math.random() * 8)}px`;
-      line.style.backgroundColor = color;
-
-      wrapper.appendChild(line);
-      grid.appendChild(wrapper);
-
-      setTimeout(() => wrapper.remove(), 30000);
-    }
-
-    for (let i = 0; i < 60; i++) createShape();
-    for (let i = 0; i < 30; i++) createLine();
-    setInterval(createShape, 1500);
-    setInterval(createLine, 2000);
-  </script>
+for (let i = 0; i < 60; i++) createShape();
+for (let i = 0; i < 30; i++) createLine();
+setInterval(createShape, 2000);
+setInterval(createLine, 2500);
 </script>
 </body>
 </html>
