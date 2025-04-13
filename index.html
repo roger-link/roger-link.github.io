@@ -79,40 +79,106 @@
 </div>
 
 <script>
-document.getElementById('showPortfolio').onclick=e=>{e.preventDefault();portfolio.style.display='block';};
-closePortfolio.onclick=()=>portfolio.style.display='none';
-lightbox.onclick=()=>{lightbox.style.display='none';};
+document.getElementById('showPortfolio').onclick = e => {
+  e.preventDefault();
+  document.getElementById('portfolio').style.display = 'block';
+};
+document.getElementById('closePortfolio').onclick = () => {
+  document.getElementById('portfolio').style.display = 'none';
+};
+document.getElementById('lightbox').onclick = () => {
+  document.getElementById('lightbox').style.display = 'none';
+};
+
 const images = [
-  "images/stuart.jpg", "images/lindsay.jpg", "images/natalie.jpg", "images/brandon.jpg",
-  "images/anji_cover.jpg", "images/ariel.jpg", "images/back_angelfuck.jpg", "images/dbcoopers_wall.jpg",
-  "images/front_angelfuck.jpg", "images/haefke3.jpg", "images/66sean.png", "images/aimix.JPG",
-  "images/asdf1.JPG", "images/badtrip.JPG", "images/balls.JPG", "images/brightroom2.JPG",
-  "images/brightroomai.JPG", "images/comiskey.jpg", "images/comiskey2.jpg", "images/conver3.JPG",
-  "images/dolly.JPG", "images/drunk.jpg", "images/DSCF1004.JPG", "images/einstein.jpg",
-  "images/fight.jpg", "images/fight2.jpg", "images/fight4.jpg", "images/fight5.jpg",
-  "images/hand.jpg", "images/icecreamhair.jpg", "images/install1.jpeg", "images/install2.jpeg",
-  "images/install3.jpeg", "images/intangible2.jpg", "images/jaimie.jpg", "images/jaimieme.jpg",
-  "images/jason.jpg", "images/jonny.jpg", "images/jonnyghost.jpg", "images/jtruck.jpg",
-  "images/kim.JPG", "images/kim2.JPG", "images/knife.jpg", "images/many.jpg",
-  "images/me.jpg", "images/me3.jpg", "images/mewithwdd.jpg", "images/orgy.JPG",
-  "images/phil2.png", "images/phil3.png", "images/phillip.png", "images/pizza.JPG",
-  "images/plateroom.JPG", "images/polaroids.jpg", "images/pornhub.JPG", "images/portland1.jpg",
-  "images/portland2.jpg", "images/portland3.jpg", "images/room3.JPG", "images/room4.JPG",
-  "images/rule.jpg", "images/sean.png", "images/shoes2.jpg", "images/skatedog.jpg",
-  "images/spooktacular.jpg", "images/tba.JPG", "images/teeth.JPG", "images/tennis.jpg",
-  "images/trees.jpg", "images/trump.JPG", "images/vampires.JPG", "images/wallpater.PNG",
-  "images/wdd2.JPG", "images/wddbaltimore.jpg", "images/wish.gif", "images/untitled34.png",
-  "images/untitled19.png", "images/untitled31.png"
-];
+        "images/stuart.jpg",
+        "images/lindsay.jpg",
+        "images/natalie.jpg",
+        "images/brandon.jpg",
+        "images/anji_cover.jpg",
+        "images/ariel.jpg",
+        "images/back_angelfuck.jpg",
+        "images/dbcoopers_wall.jpg",
+        "images/front_angelfuck.jpg",
+        "images/haefke3.jpg",
+        "images/66sean.png",
+        "images/aimix.JPG",
+        "images/asdf1.JPG",
+        "images/badtrip.JPG",
+        "images/balls.JPG",
+        "images/brightroom2.JPG",
+        "images/brightroomai.JPG",
+        "images/comiskey.jpg",
+        "images/comiskey2.jpg",
+        "images/conver3.JPG",
+        "images/dolly.JPG",
+        "images/drunk.jpg",
+        "images/DSCF1004.JPG",
+        "images/einstein.jpg",
+        "images/fight.jpg",
+        "images/fight2.jpg",
+        "images/fight4.jpg",
+        "images/fight5.jpg",
+        "images/hand.jpg",
+        "images/icecreamhair.jpg",
+        "images/install1.jpeg",
+        "images/install2.jpeg",
+        "images/install3.jpeg",
+        "images/intangible2.jpg",
+        "images/jaimie.jpg",
+        "images/jaimieme.jpg",
+        "images/jason.jpg",
+        "images/jonny.jpg",
+        "images/jonnyghost.jpg",
+        "images/jtruck.jpg",
+        "images/kim.JPG",
+        "images/kim2.JPG",
+        "images/knife.jpg",
+        "images/many.jpg",
+        "images/me.jpg",
+        "images/me3.jpg",
+        "images/mewithwdd.jpg",
+        "images/orgy.JPG",
+        "images/phil2.png",
+        "images/phil3.png",
+        "images/phillip.png",
+        "images/pizza.JPG",
+        "images/plateroom.JPG",
+        "images/polaroids.jpg",
+        "images/pornhub.JPG",
+        "images/portland1.jpg",
+        "images/portland2.jpg",
+        "images/portland3.jpg",
+        "images/room3.JPG",
+        "images/room4.JPG",
+        "images/rule.jpg",
+        "images/sean.png",
+        "images/shoes2.jpg",
+        "images/skatedog.jpg",
+        "images/spooktacular.jpg",
+        "images/tba.JPG",
+        "images/teeth.JPG",
+        "images/tennis.jpg",
+        "images/trees.jpg",
+        "images/trump.JPG",
+        "images/vampires.JPG",
+        "images/wallpater.PNG",
+        "images/wdd2.JPG",
+        "images/wddbaltimore.jpg",
+        "images/wish.gif",
+        "images/untitled34.png",
+        "images/untitled19.png",
+        "images/untitled31.png"
+      ];
 
 images.forEach(src => {
   const img = document.createElement('img');
   img.src = src;
   img.onclick = () => {
-    lightbox.querySelector('img').src = src;
-    lightbox.style.display = 'flex';
+    document.querySelector('#lightbox img').src = src;
+    document.getElementById('lightbox').style.display = 'flex';
   };
-  imageGrid.appendChild(img);
+  document.getElementById('imageGrid').appendChild(img);
 });
 
 const grid = document.getElementById('grid'),
@@ -139,13 +205,21 @@ function createShape() {
   const s = document.createElement('div'); s.className = 'abstract';
   const size = Math.random() < .1 ? 350 + Math.random() * 300 : 30 + Math.random() * 180;
   s.style.width = s.style.height = size + 'px';
+
   s.style.background = Math.random() < .35
     ? `repeating-linear-gradient(${Math.random() * 360}deg,${randomColor()} 0,${randomColor()} ${3 + Math.random() * 8}px,transparent ${8 + Math.random() * 12}px)`
     : `${randomColor()}`;
 
-  s.style.clipPath = Math.random() < .3
-    ? polygonPath(3 + Math.random() * 6 | 0)
-    : (Math.random() < .5 ? 'circle(50%)' : 'polygon(50% 0%,0% 100%,100% 100%)');
+  const shapeTypeChance = Math.random();
+  if (shapeTypeChance < 0.33) {
+    s.style.clipPath = 'circle(50%)';
+    if (Math.random() < 0.4) s.style.border = `2px solid ${randomColor()}`;
+  } else if (shapeTypeChance < 0.66) {
+    s.style.clipPath = 'polygon(50% 0%,0% 100%,100% 100%)';
+  } else {
+    s.style.clipPath = 'none';
+    if (Math.random() < 0.4) s.style.border = `2px solid ${randomColor()}`;
+  }
 
   if (Math.random() < .05) s.classList.add('rotate');
 
@@ -158,6 +232,8 @@ function createShape() {
       s.appendChild(is);
     }
   }
+
+  s.style.boxSizing = 'border-box';
 
   w.appendChild(s); grid.appendChild(w);
   setTimeout(() => { w.style.transition = 'opacity 4s'; w.style.opacity = 0; }, 36000);
