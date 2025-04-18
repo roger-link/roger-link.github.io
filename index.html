@@ -296,7 +296,10 @@
         "images/untitled19.png",
         "images/untitled31.png"
       ];
-    images.forEach(src => {
+    // Shuffle images
+    const shuffledImages = images.sort(() => 0.5 - Math.random());
+
+    shuffledImages.forEach(src => {
       const img = document.createElement('img');
       img.src = src;
       img.onclick = () => {
