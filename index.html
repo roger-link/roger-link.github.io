@@ -216,7 +216,86 @@
       document.getElementById('lightbox').style.display = 'none';
     };
 
-    const images = [/* ... image list ... */];
+    const images = [
+        "images/stuart.jpg",
+        "images/lindsay.jpg",
+        "images/natalie.jpg",
+        "images/brandon.jpg",
+        "images/anji_cover.jpg",
+        "images/ariel.jpg",
+        "images/back_angelfuck.jpg",
+        "images/dbcoopers_wall.jpg",
+        "images/front_angelfuck.jpg",
+        "images/haefke3.jpg",
+        "images/66sean.png",
+        "images/aimix.JPG",
+        "images/asdf1.JPG",
+        "images/badtrip.JPG",
+        "images/balls.JPG",
+        "images/brightroom2.JPG",
+        "images/brightroomai.JPG",
+        "images/comiskey.jpg",
+        "images/comiskey2.jpg",
+        "images/conver3.JPG",
+        "images/dolly.JPG",
+        "images/drunk.jpg",
+        "images/DSCF1004.JPG",
+        "images/einstein.jpg",
+        "images/fight.jpg",
+        "images/fight2.jpg",
+        "images/fight4.jpg",
+        "images/fight5.jpg",
+        "images/hand.jpg",
+        "images/icecreamhair.jpg",
+        "images/install1.jpeg",
+        "images/install2.jpeg",
+        "images/install3.jpeg",
+        "images/intangible2.jpg",
+        "images/jaimie.jpg",
+        "images/jaimieme.jpg",
+        "images/jason.jpg",
+        "images/jonny.jpg",
+        "images/jonnyghost.jpg",
+        "images/jtruck.jpg",
+        "images/kim.JPG",
+        "images/kim2.JPG",
+        "images/knife.jpg",
+        "images/many.jpg",
+        "images/me.jpg",
+        "images/me3.jpg",
+        "images/mewithwdd.jpg",
+        "images/orgy.JPG",
+        "images/phil2.png",
+        "images/phil3.png",
+        "images/phillip.png",
+        "images/pizza.JPG",
+        "images/plateroom.JPG",
+        "images/polaroids.jpg",
+        "images/pornhub.JPG",
+        "images/portland1.jpg",
+        "images/portland2.jpg",
+        "images/portland3.jpg",
+        "images/room3.JPG",
+        "images/room4.JPG",
+        "images/rule.jpg",
+        "images/sean.png",
+        "images/shoes2.jpg",
+        "images/skatedog.jpg",
+        "images/spooktacular.jpg",
+        "images/tba.JPG",
+        "images/teeth.JPG",
+        "images/tennis.jpg",
+        "images/trees.jpg",
+        "images/trump.JPG",
+        "images/vampires.JPG",
+        "images/wallpater.PNG",
+        "images/wdd2.JPG",
+        "images/wddbaltimore.jpg",
+        "images/wish.gif",
+        "images/untitled34.png",
+        "images/untitled19.png",
+        "images/untitled31.png"
+      ];
     images.forEach(src => {
       const img = document.createElement('img');
       img.src = src;
@@ -237,66 +316,96 @@
     }
 
     function createShape() {
-      const w = document.createElement('div');
-      w.className = 'shape';
-      w.style.left = Math.random() * W + 'px';
-      w.style.top = Math.random() * H + 'px';
+      const wrapper = document.createElement('div');
+      wrapper.className = 'shape';
+      wrapper.style.position = 'absolute';
+      wrapper.style.left = Math.random() * W + 'px';
+      wrapper.style.top = Math.random() * H + 'px';
+      wrapper.style.willChange = 'transform, opacity';
+      wrapper.style.display = 'flex';
+      wrapper.style.alignItems = 'center';
+      wrapper.style.justifyContent = 'center';
 
       const s = document.createElement('div');
       s.className = 'abstract';
-      const size = Math.random() < .1 ? 350 + Math.random() * 300 : 30 + Math.random() * 180;
-      s.style.width = s.style.height = size + 'px';
+      const size = Math.random() < 0.1 ? 350 + Math.random() * 300 : 30 + Math.random() * 180;
+      s.style.width = `${size}px`;
+      s.style.height = `${size}px`;
+      s.style.boxSizing = 'border-box';
 
-      s.style.background = Math.random() < .35
-        ? `repeating-linear-gradient(${Math.random() * 360}deg,${randomColor()} 0,${randomColor()} ${3 + Math.random() * 8}px,transparent ${8 + Math.random() * 12}px)`
-        : `${randomColor()}`;
+      const backgroundIsGradient = Math.random() < 0.35;
+      if (backgroundIsGradient) {
+        s.style.background = `repeating-linear-gradient(${Math.random() * 360}deg, ${randomColor()} 0, ${randomColor()} ${3 + Math.random() * 8}px, transparent ${8 + Math.random() * 12}px)`;
+      } else {
+        s.style.background = randomColor();
+      }
 
       const shapeTypeChance = Math.random();
       if (shapeTypeChance < 0.33) {
-        s.style.clipPath = 'circle(50%)';
-        if (Math.random() < 0.4) s.style.border = `2px solid ${randomColor()}`;
+        s.style.clipPath = 'circle(50%)'; // Circle
       } else if (shapeTypeChance < 0.66) {
-        s.style.clipPath = 'polygon(50% 0%,0% 100%,100% 100%)';
+        s.style.clipPath = 'polygon(50% 0%, 0% 100%, 100% 100%)'; // Triangle
       } else {
-        s.style.clipPath = 'none';
-        if (Math.random() < 0.4) s.style.border = `2px solid ${randomColor()}`;
+        s.style.clipPath = 'none'; // Square
       }
 
-      if (Math.random() < .05) s.classList.add('rotate');
+      const borderColor = randomColor();
+      if (Math.random() < 0.5) {
+      wrapper.style.border = `2px solid ${borderColor}`;
 
-      if (Math.random() < .07) {
-        for (let i = 0; i < 3 + Math.random() * 6 | 0; i++) {
-          const is = document.createElement('div');
-          is.className = 'inner-shape';
-          const isize = size * (.15 + .25 * Math.random());
-          is.style.width = is.style.height = isize + 'px';
-          is.style.background = randomColor();
-          is.style.left = Math.random() * 70 + '%';
-          is.style.top = Math.random() * 70 + '%';
-          s.appendChild(is);
-        }
+      if (s.style.clipPath === 'circle(50%)') {
+        wrapper.style.borderRadius = '50%';
+      } else if (s.style.clipPath.startsWith('polygon')) {
+        wrapper.style.clipPath = s.style.clipPath; // Copy the triangle clip to wrapper too
+      } else {
+        wrapper.style.borderRadius = '0';
       }
-
-      w.appendChild(s);
-      grid.appendChild(w);
-
-      setTimeout(() => {
-        w.style.transition = 'opacity 4s';
-        w.style.opacity = 0;
-      }, 36000);
-      setTimeout(() => w.remove(), 40000);
-
-      const freq = .3 + Math.random() * .5,
-            amp = 15 + Math.random() * 20,
-            ox = Math.random() * 1000,
-            oy = Math.random() * 1000;
-
-      (function animate() {
-        const t = performance.now() / 1000;
-        w.style.transform = `translate(${Math.sin(t * freq + ox) * amp}px,${Math.cos(t * freq + oy) * amp}px)`;
-        requestAnimationFrame(animate);
-      })();
     }
+
+  if (Math.random() < 0.05) {
+    s.classList.add('rotate');
+  }
+
+  if (Math.random() < 0.07) {
+    const innerCount = 3 + Math.floor(Math.random() * 6);
+    for (let i = 0; i < innerCount; i++) {
+      const is = document.createElement('div');
+      is.className = 'inner-shape';
+      const isize = size * (0.15 + Math.random() * 0.25);
+      is.style.width = `${isize}px`;
+      is.style.height = `${isize}px`;
+      is.style.background = randomColor();
+      is.style.left = Math.random() * 70 + '%';
+      is.style.top = Math.random() * 70 + '%';
+      s.appendChild(is);
+    }
+  }
+
+  wrapper.appendChild(s);
+  grid.appendChild(wrapper);
+
+  setTimeout(() => {
+    wrapper.style.transition = 'opacity 4s';
+    wrapper.style.opacity = 0;
+  }, 36000);
+
+  setTimeout(() => {
+    wrapper.remove();
+  }, 40000);
+
+  const freq = 0.3 + Math.random() * 0.5;
+  const amp = 15 + Math.random() * 20;
+  const ox = Math.random() * 1000;
+  const oy = Math.random() * 1000;
+
+  function animate() {
+    const t = performance.now() / 1000;
+    wrapper.style.transform = `translate(${Math.sin(t * freq + ox) * amp}px, ${Math.cos(t * freq + oy) * amp}px)`;
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+}
 
     function createLine() {
       const w = document.createElement('div');
