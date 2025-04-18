@@ -39,6 +39,9 @@
   </script>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet"/>
   <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
     html, body {
       margin: 0;
       padding: 0;
@@ -109,12 +112,15 @@
       overflow: auto;
       z-index: 20;
       padding: 60px 5vw 40px;
+      box-sizing: border-box;
     }
+
+
 
     .portfolio .close {
       position: fixed;
       top: 20px;
-      left: 30px;
+      right: 30px;
       font-size: 2em;
       color: #e8d6ff;
       cursor: pointer;
@@ -186,6 +192,40 @@
       position: absolute;
       pointer-events: none;
     }
+    @media (max-width: 600px) {
+      .image-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 12px;
+      }
+
+      .portfolio {
+        padding: 40px 4vw 30px;
+      }
+
+      .portfolio h3 {
+        font-size: 1.2em;
+      }
+    }
+    .image-grid img {
+      max-width: 100%;
+      height: auto;
+    }
+    .portfolio {
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+    .image-grid {
+      grid-template-columns: repeat(auto-fit, minmax(clamp(120px, 25%, 180px), 1fr));
+    }
+    .lightbox-close {
+      position: fixed;
+      top: 20px;
+      right: 30px;
+      font-size: 2em;
+      color: #e8d6ff;
+      cursor: pointer;
+      z-index: 1000;
+    }
   </style>
 </head>
 <body>
@@ -197,7 +237,10 @@
     <a href="https://cancelledfutures.bandcamp.com/album/asdf" target="_blank">Cancelled Futures</a>
   </div>
 
-  <div class="lightbox" id="lightbox"><img src="" alt=""></div>
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-close" id="lightboxClose">&times;</div>
+    <img src="" alt="">
+  </div>
   <div class="portfolio" id="portfolio">
     <div class="close" id="closePortfolio">&times;</div>
     <h3>Portfolio</h3>
@@ -213,6 +256,9 @@
       document.getElementById('portfolio').style.display = 'none';
     };
     document.getElementById('lightbox').onclick = () => {
+      document.getElementById('lightbox').style.display = 'none';
+    };
+    document.getElementById('lightboxClose').onclick = () => {
       document.getElementById('lightbox').style.display = 'none';
     };
 
