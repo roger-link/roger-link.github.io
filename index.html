@@ -115,8 +115,6 @@
       box-sizing: border-box;
     }
 
-
-
     .portfolio .close {
       position: fixed;
       top: 20px;
@@ -192,6 +190,7 @@
       position: absolute;
       pointer-events: none;
     }
+
     @media (max-width: 600px) {
       .image-grid {
         grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
@@ -206,17 +205,21 @@
         font-size: 1.2em;
       }
     }
+
     .image-grid img {
       max-width: 100%;
       height: auto;
     }
+
     .portfolio {
       max-width: 100vw;
       overflow-x: hidden;
     }
+
     .image-grid {
       grid-template-columns: repeat(auto-fit, minmax(clamp(120px, 25%, 180px), 1fr));
     }
+
     .lightbox-close {
       position: fixed;
       top: 20px;
@@ -233,7 +236,7 @@
   <div class="name">Roger Link</div>
   <div class="nav">
     <a href="#" id="showPortfolio">Portfolio</a>
-    <a href="https://www.linkedin.com/in/rogerlink/" target="_blank">Resume</a>
+    <a href="/bio">Bio</a>
     <a href="https://cancelledfutures.bandcamp.com/album/asdf" target="_blank">Cancelled Futures</a>
   </div>
 
@@ -344,7 +347,7 @@
         "images/collage-0155.png",
         "images/collage-0228.png"
       ];
-    // Shuffle images
+
     const shuffledImages = images.sort(() => 0.5 - Math.random());
 
     shuffledImages.forEach(src => {
@@ -393,70 +396,69 @@
 
       const shapeTypeChance = Math.random();
       if (shapeTypeChance < 0.33) {
-        s.style.clipPath = 'circle(50%)'; // Circle
+        s.style.clipPath = 'circle(50%)';
       } else if (shapeTypeChance < 0.66) {
-        s.style.clipPath = 'polygon(50% 0%, 0% 100%, 100% 100%)'; // Triangle
+        s.style.clipPath = 'polygon(50% 0%, 0% 100%, 100% 100%)';
       } else {
-        s.style.clipPath = 'none'; // Square
+        s.style.clipPath = 'none';
       }
 
       const borderColor = randomColor();
       if (Math.random() < 0.5) {
-      wrapper.style.border = `2px solid ${borderColor}`;
-
-      if (s.style.clipPath === 'circle(50%)') {
-        wrapper.style.borderRadius = '50%';
-      } else if (s.style.clipPath.startsWith('polygon')) {
-        wrapper.style.clipPath = s.style.clipPath; // Copy the triangle clip to wrapper too
-      } else {
-        wrapper.style.borderRadius = '0';
+        wrapper.style.border = `2px solid ${borderColor}`;
+        if (s.style.clipPath === 'circle(50%)') {
+          wrapper.style.borderRadius = '50%';
+        } else if (s.style.clipPath.startsWith('polygon')) {
+          wrapper.style.clipPath = s.style.clipPath;
+        } else {
+          wrapper.style.borderRadius = '0';
+        }
       }
+
+      if (Math.random() < 0.05) {
+        s.classList.add('rotate');
+      }
+
+      if (Math.random() < 0.07) {
+        const innerCount = 3 + Math.floor(Math.random() * 6);
+        for (let i = 0; i < innerCount; i++) {
+          const is = document.createElement('div');
+          is.className = 'inner-shape';
+          const isize = size * (0.15 + Math.random() * 0.25);
+          is.style.width = `${isize}px`;
+          is.style.height = `${isize}px`;
+          is.style.background = randomColor();
+          is.style.left = Math.random() * 70 + '%';
+          is.style.top = Math.random() * 70 + '%';
+          s.appendChild(is);
+        }
+      }
+
+      wrapper.appendChild(s);
+      grid.appendChild(wrapper);
+
+      setTimeout(() => {
+        wrapper.style.transition = 'opacity 4s';
+        wrapper.style.opacity = 0;
+      }, 36000);
+
+      setTimeout(() => {
+        wrapper.remove();
+      }, 40000);
+
+      const freq = 0.3 + Math.random() * 0.5;
+      const amp = 15 + Math.random() * 20;
+      const ox = Math.random() * 1000;
+      const oy = Math.random() * 1000;
+
+      function animate() {
+        const t = performance.now() / 1000;
+        wrapper.style.transform = `translate(${Math.sin(t * freq + ox) * amp}px, ${Math.cos(t * freq + oy) * amp}px)`;
+        requestAnimationFrame(animate);
+      }
+
+      animate();
     }
-
-  if (Math.random() < 0.05) {
-    s.classList.add('rotate');
-  }
-
-  if (Math.random() < 0.07) {
-    const innerCount = 3 + Math.floor(Math.random() * 6);
-    for (let i = 0; i < innerCount; i++) {
-      const is = document.createElement('div');
-      is.className = 'inner-shape';
-      const isize = size * (0.15 + Math.random() * 0.25);
-      is.style.width = `${isize}px`;
-      is.style.height = `${isize}px`;
-      is.style.background = randomColor();
-      is.style.left = Math.random() * 70 + '%';
-      is.style.top = Math.random() * 70 + '%';
-      s.appendChild(is);
-    }
-  }
-
-  wrapper.appendChild(s);
-  grid.appendChild(wrapper);
-
-  setTimeout(() => {
-    wrapper.style.transition = 'opacity 4s';
-    wrapper.style.opacity = 0;
-  }, 36000);
-
-  setTimeout(() => {
-    wrapper.remove();
-  }, 40000);
-
-  const freq = 0.3 + Math.random() * 0.5;
-  const amp = 15 + Math.random() * 20;
-  const ox = Math.random() * 1000;
-  const oy = Math.random() * 1000;
-
-  function animate() {
-    const t = performance.now() / 1000;
-    wrapper.style.transform = `translate(${Math.sin(t * freq + ox) * amp}px, ${Math.cos(t * freq + oy) * amp}px)`;
-    requestAnimationFrame(animate);
-  }
-
-  animate();
-}
 
     function createLine() {
       const w = document.createElement('div');
