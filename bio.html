@@ -18,10 +18,13 @@
       --paper: #f4f1ec;
       --paper-mid: #e8e3da;
       --rule: #d0c9be;
-      --accent: #b84c20;
+      --accent: #2b3a7a;
     }
 
-    html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+    html {
+      font-size: 16px;
+      -webkit-text-size-adjust: 100%;
+    }
 
     body {
       background: var(--paper);
@@ -32,8 +35,13 @@
       min-height: 100vh;
     }
 
-    .page { max-width: 580px; margin: 0 auto; padding: 3.5rem 1.5rem 5rem; }
+    .page {
+      max-width: 580px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem 5rem;
+    }
 
+    /* Header */
     header {
       padding-bottom: 2rem;
       margin-bottom: 2.5rem;
@@ -84,8 +92,12 @@
       transition: color 0.2s, border-color 0.2s;
     }
 
-    .contact-list a:hover { color: var(--accent); border-color: var(--accent); }
+    .contact-list a:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
 
+    /* Sections */
     section {
       margin-bottom: 2.5rem;
       opacity: 0;
@@ -106,6 +118,7 @@
       margin-bottom: 1rem;
     }
 
+    /* Bio */
     .bio p {
       font-size: clamp(1rem, 3.5vw, 1.08rem);
       line-height: 1.85;
@@ -114,14 +127,27 @@
     }
 
     .bio p + p { margin-top: 1rem; }
-    .bio em { font-style: italic; color: var(--ink-mid); }
 
-    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-
-    @media (max-width: 480px) {
-      .two-col { grid-template-columns: 1fr; gap: 2rem; }
+    .bio em {
+      font-style: italic;
+      color: var(--ink-mid);
     }
 
+    /* Two col */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    @media (max-width: 480px) {
+      .two-col {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+
+    /* Making list */
     .making-list {
       list-style: none;
       display: flex;
@@ -129,7 +155,10 @@
       gap: 0.9rem;
     }
 
-    .making-list li { border-left: 1px solid var(--rule); padding-left: 0.9rem; }
+    .making-list li {
+      border-left: 1px solid var(--rule);
+      padding-left: 0.9rem;
+    }
 
     .item-title {
       font-family: 'Lora', serif;
@@ -148,7 +177,12 @@
       display: block;
     }
 
-    .pill-group { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    /* Pills */
+    .pill-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
 
     .pill {
       font-family: 'DM Mono', monospace;
@@ -162,9 +196,10 @@
       border-radius: 2px;
     }
 
+    /* Statement */
     .statement {
       background: var(--paper-mid);
-      border-left: 2px solid var(--rule);
+      border-left: 2px solid var(--accent);
       padding: 1.1rem 1.25rem;
     }
 
@@ -177,6 +212,7 @@
       color: var(--ink-mid);
     }
 
+    /* Footer */
     footer {
       margin-top: 3rem;
       padding-top: 1.5rem;
@@ -197,7 +233,10 @@
       transition: color 0.2s, border-color 0.2s;
     }
 
-    .footer-link:hover { color: var(--accent); border-color: var(--accent); }
+    .footer-link:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
 
     @keyframes rise {
       from { opacity: 0; transform: translateY(10px); }
@@ -223,8 +262,8 @@
     <section>
       <div class="label">About</div>
       <div class="bio">
-        <p>I'm an engineer by trade but I make other things too — music, prints, tools. I've always been more interested in whether something works well than whether it looks impressive.</p>
-        <p>I came across your shop and it made sense to me immediately — the function-first idea, but also just the way things look. The details you notice on second look. I'd like to learn how you run it. I can help with design and creative stuff in return — no formal arrangement needed.</p>
+        
+        <p>I'm drawn to things made with intention — objects, systems, sounds. The thread running through everything I make is that I start with what something needs to do, and try not to add anything it doesn't.</p>
       </div>
     </section>
 
@@ -269,9 +308,9 @@
     </section>
 
     <section>
-      <div class="label">What I'm looking for</div>
+      <div class="label">Approach</div>
       <div class="statement">
-        <p>Not looking for a job. Just want to understand how a business like this actually works from the inside. I'd help with whatever's useful on the creative side — design, visuals, documentation, whatever. No formal structure needed, I'll fit around you.</p>
+        <p>I've spent most of my career building things that cut waste and add clarity. I'm equally interested in how things look and feel — not as separate from function, but as part of it.</p>
       </div>
     </section>
 
