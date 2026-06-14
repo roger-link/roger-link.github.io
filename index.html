@@ -128,7 +128,42 @@
     .portfolio h3 {
       color: #e8d6ff;
       text-align: center;
+      margin: 0;
+    }
+
+    .portfolio-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
       margin-bottom: 30px;
+    }
+
+    .portfolio-filters {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .portfolio-filter {
+      color: #e8d6ff;
+      font: inherit;
+      font-size: 0.95rem;
+      padding: 6px 12px;
+      background: rgba(0,0,0,.35);
+      border: 1px solid rgba(232,214,255,.25);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background .2s ease, border-color .2s ease, color .2s ease;
+    }
+
+    .portfolio-filter:hover,
+    .portfolio-filter[aria-pressed="true"] {
+      color: #fff;
+      background: rgba(232,214,255,.16);
+      border-color: rgba(232,214,255,.7);
     }
 
     .image-grid {
@@ -204,6 +239,16 @@
       .portfolio h3 {
         font-size: 1.2em;
       }
+
+      .portfolio-header {
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+
+      .portfolio-filter {
+        font-size: 0.85rem;
+        padding: 5px 9px;
+      }
     }
 
     .image-grid img {
@@ -236,7 +281,7 @@
   <div class="name">Roger Link</div>
   <div class="nav">
     <a href="#" id="showPortfolio">Portfolio</a>
-    <a href="/bio">Bio</a>
+    <a href="/bio.html">Bio</a>
     <a href="https://cancelledfutures.bandcamp.com/album/asdf" target="_blank">Cancelled Futures</a>
   </div>
 
@@ -246,7 +291,10 @@
   </div>
   <div class="portfolio" id="portfolio">
     <div class="close" id="closePortfolio">&times;</div>
-    <h3>Portfolio</h3>
+    <div class="portfolio-header">
+      <h3>Portfolio</h3>
+      <div class="portfolio-filters" id="portfolioFilters" aria-label="Portfolio filters"></div>
+    </div>
     <div class="image-grid" id="imageGrid"></div>
   </div>
 
@@ -265,100 +313,69 @@
       document.getElementById('lightbox').style.display = 'none';
     };
 
-    const images = [
-        "images/stuart.jpg",
-        "images/lindsay.jpg",
-        "images/natalie.jpg",
-        "images/brandon.jpg",
-        "images/anji_cover.jpg",
-        "images/ariel.jpg",
-        "images/back_angelfuck.jpg",
-        "images/dbcoopers_wall.jpg",
-        "images/front_angelfuck.jpg",
-        "images/haefke3.jpg",
-        "images/66sean.png",
-        "images/aimix.JPG",
-        "images/asdf1.JPG",
-        "images/badtrip.JPG",
-        "images/balls.JPG",
-        "images/brightroom2.JPG",
-        "images/brightroomai.JPG",
-        "images/comiskey.jpg",
-        "images/comiskey2.jpg",
-        "images/conver3.JPG",
-        "images/dolly.JPG",
-        "images/drunk.jpg",
-        "images/DSCF1004.JPG",
-        "images/einstein.jpg",
-        "images/fight.jpg",
-        "images/fight2.jpg",
-        "images/fight4.jpg",
-        "images/fight5.jpg",
-        "images/hand.jpg",
-        "images/icecreamhair.jpg",
-        "images/install1.jpeg",
-        "images/install2.jpeg",
-        "images/install3.jpeg",
-        "images/intangible2.jpg",
-        "images/jaimie.jpg",
-        "images/jaimieme.jpg",
-        "images/jason.jpg",
-        "images/jonny.jpg",
-        "images/jonnyghost.jpg",
-        "images/jtruck.jpg",
-        "images/kim.JPG",
-        "images/kim2.JPG",
-        "images/knife.jpg",
-        "images/many.jpg",
-        "images/me.jpg",
-        "images/me3.jpg",
-        "images/orgy.JPG",
-        "images/phil2.png",
-        "images/phil3.png",
-        "images/phillip.png",
-        "images/pizza.JPG",
-        "images/plateroom.JPG",
-        "images/polaroids.jpg",
-        "images/pornhub.JPG",
-        "images/portland1.jpg",
-        "images/portland2.jpg",
-        "images/portland3.jpg",
-        "images/room3.JPG",
-        "images/room4.JPG",
-        "images/rule.jpg",
-        "images/sean.png",
-        "images/shoes2.jpg",
-        "images/skatedog.jpg",
-        "images/spooktacular.jpg",
-        "images/tba.JPG",
-        "images/teeth.JPG",
-        "images/tennis.jpg",
-        "images/trees.jpg",
-        "images/trump.JPG",
-        "images/vampires.JPG",
-        "images/wallpater.PNG",
-        "images/wdd2.JPG",
-        "images/wddbaltimore.jpg",
-        "images/wish.gif",
-        "images/untitled34.png",
-        "images/untitled19.png",
-        "images/untitled31.png",
-        "images/collage-0220.png",
-        "images/collage-0155.png",
-        "images/collage-0228.png"
-      ];
+    const typeLabels = {
+      all: 'All',
+      drawing: 'Drawing',
+      photo: 'Photo',
+      paint: 'Paint',
+      graphic: 'Graphic'
+    };
 
-    const shuffledImages = images.sort(() => 0.5 - Math.random());
+    let portfolioItems = [];
+    let activeType = 'all';
 
-    shuffledImages.forEach(src => {
-      const img = document.createElement('img');
-      img.src = src;
-      img.onclick = () => {
-        document.querySelector('#lightbox img').src = src;
-        document.getElementById('lightbox').style.display = 'flex';
-      };
-      document.getElementById('imageGrid').appendChild(img);
-    });
+    function shuffle(items) {
+      return [...items].sort(() => 0.5 - Math.random());
+    }
+
+    function renderFilters() {
+      const filters = document.getElementById('portfolioFilters');
+      filters.innerHTML = '';
+      Object.entries(typeLabels).forEach(([type, label]) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'portfolio-filter';
+        button.textContent = label;
+        button.setAttribute('aria-pressed', type === activeType ? 'true' : 'false');
+        button.onclick = () => {
+          activeType = type;
+          renderFilters();
+          renderPortfolio();
+        };
+        filters.appendChild(button);
+      });
+    }
+
+    function renderPortfolio() {
+      const grid = document.getElementById('imageGrid');
+      grid.innerHTML = '';
+      const visibleItems = activeType === 'all'
+        ? portfolioItems
+        : portfolioItems.filter(item => item.type === activeType);
+
+      visibleItems.forEach(item => {
+        const img = document.createElement('img');
+        img.src = item.src;
+        img.alt = `${typeLabels[item.type] || 'Portfolio'} work by Roger Link`;
+        img.loading = 'lazy';
+        img.onclick = () => {
+          document.querySelector('#lightbox img').src = item.src;
+          document.getElementById('lightbox').style.display = 'flex';
+        };
+        document.getElementById('imageGrid').appendChild(img);
+      });
+    }
+
+    fetch('data/portfolio.json?v=portfolio-types-1', { cache: 'no-store' })
+      .then(response => response.json())
+      .then(items => {
+        portfolioItems = shuffle(items);
+        renderFilters();
+        renderPortfolio();
+      })
+      .catch(() => {
+        document.getElementById('imageGrid').innerHTML = '<p style="color:#e8d6ff;text-align:center;grid-column:1/-1;">Portfolio images could not be loaded.</p>';
+      });
 
     const grid = document.getElementById('grid'),
           W = window.innerWidth,
