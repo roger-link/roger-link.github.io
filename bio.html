@@ -41,7 +41,6 @@
       padding: 3.5rem 1.5rem 5rem;
     }
 
-    /* Header */
     header {
       padding-bottom: 2rem;
       margin-bottom: 2.5rem;
@@ -97,7 +96,6 @@
       border-color: var(--accent);
     }
 
-    /* Sections */
     section {
       margin-bottom: 2.5rem;
       opacity: 0;
@@ -118,7 +116,6 @@
       margin-bottom: 1rem;
     }
 
-    /* Bio */
     .bio p {
       font-size: clamp(1rem, 3.5vw, 1.08rem);
       line-height: 1.85;
@@ -133,21 +130,6 @@
       color: var(--ink-mid);
     }
 
-    /* Two col */
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-    }
-
-    @media (max-width: 480px) {
-      .two-col {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-    }
-
-    /* Making list */
     .making-list {
       list-style: none;
       display: flex;
@@ -177,26 +159,6 @@
       display: block;
     }
 
-    /* Pills */
-    .pill-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.45rem;
-    }
-
-    .pill {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      font-weight: 300;
-      letter-spacing: 0.04em;
-      padding: 0.3rem 0.7rem;
-      border: 1px solid var(--rule);
-      color: var(--ink-mid);
-      background: transparent;
-      border-radius: 2px;
-    }
-
-    /* Statement */
     .statement {
       background: var(--paper-mid);
       border-left: 2px solid var(--accent);
@@ -212,7 +174,6 @@
       color: var(--ink-mid);
     }
 
-    /* Footer */
     footer {
       margin-top: 3rem;
       padding-top: 1.5rem;
@@ -262,49 +223,30 @@
     <section>
       <div class="label">About</div>
       <div class="bio">
-        
         <p>I'm drawn to things made with intention — objects, systems, sounds. The thread running through everything I make is that I start with what something needs to do, and try not to add anything it doesn't.</p>
       </div>
     </section>
 
     <section>
-      <div class="two-col">
-        <div>
-          <div class="label">Making &amp; craft</div>
-          <ul class="making-list">
-            <li>
-              <span class="item-title">Letterpress printing</span>
-              <span class="item-sub">Zz School of Print Media, 2016</span>
-            </li>
-            <li>
-              <span class="item-title">Electronic music</span>
-              <span class="item-sub">Cancelled Futures — bandcamp</span>
-            </li>
-            <li>
-              <span class="item-title">Fine art</span>
-              <span class="item-sub">Kansas City Art Institute</span>
-            </li>
-            <li>
-              <span class="item-title">Software systems</span>
-              <span class="item-sub">20 years — tools that cut waste</span>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <div class="label">What I'd offer</div>
-          <div class="pill-group">
-            <span class="pill">Visual assets</span>
-            <span class="pill">Brand &amp; print</span>
-            <span class="pill">Photography editing</span>
-            <span class="pill">Process documentation</span>
-            <span class="pill">Digital presence</span>
-            <span class="pill">Social graphics</span>
-            <span class="pill">Operational tools</span>
-            <span class="pill">Market display</span>
-          </div>
-        </div>
-      </div>
+      <div class="label">Making &amp; craft</div>
+      <ul class="making-list">
+        <li>
+          <span class="item-title">Letterpress printing</span>
+          <span class="item-sub">Zz School of Print Media, 2016</span>
+        </li>
+        <li>
+          <span class="item-title">Electronic music</span>
+          <span class="item-sub">Cancelled Futures — bandcamp</span>
+        </li>
+        <li>
+          <span class="item-title">Fine art</span>
+          <span class="item-sub">Kansas City Art Institute</span>
+        </li>
+        <li>
+          <span class="item-title">Software systems</span>
+          <span class="item-sub">20 years — tools that cut waste</span>
+        </li>
+      </ul>
     </section>
 
     <section>
