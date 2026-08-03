@@ -34,7 +34,7 @@
     "tags": [
       "installations"
     ],
-    "type": "graphic"
+    "type": "digital"
   },
   {
     "src": "images/ariel.jpg",
@@ -49,7 +49,7 @@
     "tags": [
       "early"
     ],
-    "type": "graphic"
+    "type": "digital"
   },
   {
     "src": "images/dbcoopers_wall.jpg",
@@ -63,7 +63,7 @@
     "tags": [
       "early"
     ],
-    "type": "graphic"
+    "type": "digital"
   },
   {
     "src": "images/haefke3.jpg",
@@ -85,7 +85,7 @@
     "tags": [
       "newest"
     ],
-    "type": "drawing"
+    "type": "digital"
   },
   {
     "src": "images/asdf1.JPG",
@@ -128,14 +128,14 @@
     "tags": [
       "early"
     ],
-    "type": "graphic"
+    "type": "digital"
   },
   {
     "src": "images/comiskey2.jpg",
     "tags": [
       "early"
     ],
-    "type": "graphic"
+    "type": "digital"
   },
   {
     "src": "images/conver3.JPG",
@@ -212,7 +212,7 @@
     "tags": [
       "early"
     ],
-    "type": "graphic"
+    "type": "digital"
   },
   {
     "src": "images/install1.jpeg",
@@ -304,7 +304,7 @@
     "tags": [
       "portrait"
     ],
-    "type": "drawing"
+    "type": "graphic"
   },
   {
     "src": "images/many.jpg",
@@ -381,7 +381,7 @@
     "tags": [
       "early"
     ],
-    "type": "graphic"
+    "type": "digital"
   },
   {
     "src": "images/portland1.jpg",
@@ -423,7 +423,7 @@
     "tags": [
       "early"
     ],
-    "type": "graphic"
+    "type": "digital"
   },
   {
     "src": "images/sean.png",
@@ -451,14 +451,14 @@
     "tags": [
       "early"
     ],
-    "type": "graphic"
+    "type": "digital"
   },
   {
     "src": "images/tba.JPG",
     "tags": [
       "early"
     ],
-    "type": "graphic"
+    "type": "digital"
   },
   {
     "src": "images/teeth.JPG",
@@ -486,7 +486,7 @@
     "tags": [
       "early"
     ],
-    "type": "drawing"
+    "type": "digital"
   },
   {
     "src": "images/vampires.JPG",
@@ -521,7 +521,7 @@
     "tags": [
       "early"
     ],
-    "type": "graphic"
+    "type": "digital"
   },
   {
     "src": "images/untitled34.png",
@@ -549,28 +549,28 @@
     "tags": [
       "newest"
     ],
-    "type": "graphic"
+    "type": "digital"
   },
   {
     "src": "images/collage-0220.png",
     "tags": [
       "newest"
     ],
-    "type": "drawing"
+    "type": "digital"
   },
   {
     "src": "images/collage-0155.png",
     "tags": [
       "newest"
     ],
-    "type": "drawing"
+    "type": "digital"
   },
   {
     "src": "images/collage-0228.png",
     "tags": [
       "newest"
     ],
-    "type": "drawing"
+    "type": "digital"
   },
 {
   "src": "images/void1.png",
