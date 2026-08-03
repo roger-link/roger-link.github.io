@@ -92,7 +92,7 @@
     "tags": [
       "early"
     ],
-    "type": "paint"
+    "type": "digital"
   },
   {
     "src": "images/badtrip.JPG",
@@ -100,14 +100,14 @@
       "installations",
       "newest"
     ],
-    "type": "paint"
+    "type": "digital"
   },
   {
     "src": "images/balls.JPG",
     "tags": [
       "early"
     ],
-    "type": "paint"
+    "type": "digital"
   },
   {
     "src": "images/brightroom2.JPG",
@@ -121,35 +121,35 @@
     "tags": [
       "newest"
     ],
-    "type": "photo"
+    "type": "digital"
   },
   {
     "src": "images/comiskey.jpg",
     "tags": [
       "early"
     ],
-    "type": "digital"
+    "type": "photo"
   },
   {
     "src": "images/comiskey2.jpg",
     "tags": [
       "early"
     ],
-    "type": "digital"
+    "type": "photo"
   },
   {
     "src": "images/conver3.JPG",
     "tags": [
       "newest"
     ],
-    "type": "paint"
+    "type": "digital"
   },
   {
     "src": "images/dolly.JPG",
     "tags": [
       "portrait"
     ],
-    "type": "paint"
+    "type": "digital"
   },
   {
     "src": "images/drunk.jpg",
@@ -339,7 +339,7 @@
     "tags": [
       "early"
     ],
-    "type": "paint"
+    "type": "digital"
   },
   {
     "src": "images/phil2.png",
@@ -367,14 +367,14 @@
     "tags": [
       "early"
     ],
-    "type": "paint"
+    "type": "digital"
   },
   {
     "src": "images/plateroom.JPG",
     "tags": [
       "installations"
     ],
-    "type": "paint"
+    "type": "digital"
   },
   {
     "src": "images/polaroids.jpg",
@@ -493,7 +493,7 @@
     "tags": [
       "early"
     ],
-    "type": "paint"
+    "type": "digital"
   },
   {
     "src": "images/wallpater.PNG",
@@ -560,16 +560,12 @@
   },
   {
     "src": "images/collage-0155.png",
-    "tags": [
-      "newest"
-    ],
+    "tags": [],
     "type": "digital"
   },
   {
     "src": "images/collage-0228.png",
-    "tags": [
-      "newest"
-    ],
+    "tags": [],
     "type": "digital"
   },
 {
