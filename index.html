@@ -299,12 +299,30 @@
   </div>
 
   <script>
+    const PORTFOLIO_PARAM = 'filter';
+
+    function getFilterFromURL() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(PORTFOLIO_PARAM);
+    }
+
+    function setFilterInURL(type) {
+      const url = new URL(window.location.href);
+      if (type === 'all') {
+        url.searchParams.delete(PORTFOLIO_PARAM);
+      } else {
+        url.searchParams.set(PORTFOLIO_PARAM, type);
+      }
+      history.replaceState(null, '', url.toString());
+    }
+
     document.getElementById('showPortfolio').onclick = e => {
       e.preventDefault();
       document.getElementById('portfolio').style.display = 'block';
     };
     document.getElementById('closePortfolio').onclick = () => {
       document.getElementById('portfolio').style.display = 'none';
+      setFilterInURL('all');
     };
     document.getElementById('lightbox').onclick = () => {
       document.getElementById('lightbox').style.display = 'none';
@@ -324,6 +342,10 @@
 
     let portfolioItems = [];
     let activeType = 'all';
+    const urlFilter = getFilterFromURL();
+    if (urlFilter && Object.prototype.hasOwnProperty.call(typeLabels, urlFilter)) {
+      activeType = urlFilter;
+    }
 
     function shuffle(items) {
       return [...items].sort(() => 0.5 - Math.random());
@@ -340,6 +362,7 @@
         button.setAttribute('aria-pressed', type === activeType ? 'true' : 'false');
         button.onclick = () => {
           activeType = type;
+          setFilterInURL(type);
           renderFilters();
           renderPortfolio();
         };
@@ -373,6 +396,9 @@
         portfolioItems = shuffle(items);
         renderFilters();
         renderPortfolio();
+        if (urlFilter && Object.prototype.hasOwnProperty.call(typeLabels, urlFilter)) {
+          document.getElementById('portfolio').style.display = 'block';
+        }
       })
       .catch(() => {
         document.getElementById('imageGrid').innerHTML = '<p style="color:#e8d6ff;text-align:center;grid-column:1/-1;">Portfolio images could not be loaded.</p>';
