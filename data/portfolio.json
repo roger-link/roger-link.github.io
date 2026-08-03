@@ -571,31 +571,31 @@
 {
   "src": "images/void1.png",
   "tags": ["newest"],
-  "type": "digital"
+  "type": "new"
 },
 {
   "src": "images/void2.png",
   "tags": ["newest"],
-  "type": "digital"
+  "type": "new"
 },
 {
   "src": "images/void3.png",
   "tags": ["newest"],
-  "type": "digital"
+  "type": "new"
 },
 {
   "src": "images/void4.png",
   "tags": ["newest"],
-  "type": "digital"
+  "type": "new"
 },
 {
   "src": "images/void5.png",
   "tags": ["newest"],
-  "type": "digital"
+  "type": "new"
 },
 {
   "src": "images/void6.png",
   "tags": ["newest"],
-  "type": "digital"
+  "type": "new"
 }
 ]
