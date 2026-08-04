@@ -597,5 +597,30 @@
   "src": "images/void6.png",
   "tags": ["newest"],
   "type": "current"
+},
+{
+  "src": "images/hose.png",
+  "tags": ["newest"],
+  "type": "current"
+},{
+  "src": "images/cardboard.png",
+  "tags": ["newest"],
+  "type": "current"
+},{
+  "src": "images/bags.png",
+  "tags": ["newest"],
+  "type": "current"
+},{
+  "src": "images/fire.png",
+  "tags": ["newest"],
+  "type": "current"
+},{
+  "src": "images/foam.png",
+  "tags": ["newest"],
+  "type": "current"
+},{
+  "src": "images/tape.png",
+  "tags": ["newest"],
+  "type": "current"
 }
 ]
