@@ -622,5 +622,10 @@
   "src": "images/tape.png",
   "tags": ["newest"],
   "type": "current"
+},
+{
+  "src": "images/burden-weiss.png",
+  "tags": ["newest"],
+  "type": "current"
 }
 ]
