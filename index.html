@@ -318,6 +318,10 @@
 
     document.getElementById('showPortfolio').onclick = e => {
       e.preventDefault();
+      activeType = 'current';
+      setFilterInURL(activeType);
+      renderFilters();
+      renderPortfolio();
       document.getElementById('portfolio').style.display = 'block';
     };
     document.getElementById('closePortfolio').onclick = () => {
@@ -332,10 +336,13 @@
     };
 
     const typeLabels = {
+      all: 'All',
       current: 'Current',
       drawing: 'Drawing',
-      digital: 'Digital',
-      all: 'All'
+      photo: 'Photo',
+      paint: 'Paint',
+      graphic: 'Graphic',
+      digital: 'Digital'
     };
 
     let portfolioItems = [];
@@ -345,9 +352,6 @@
       activeType = urlFilter;
     }
 
-    function shuffle(items) {
-      return [...items].sort(() => 0.5 - Math.random());
-    }
 
     function renderFilters() {
       const filters = document.getElementById('portfolioFilters');
@@ -391,7 +395,7 @@
     fetch('data/portfolio.json?v=portfolio-types-1', { cache: 'no-store' })
       .then(response => response.json())
       .then(items => {
-        portfolioItems = shuffle(items);
+        portfolioItems = items;
         renderFilters();
         renderPortfolio();
         if (urlFilter && Object.prototype.hasOwnProperty.call(typeLabels, urlFilter)) {
