@@ -627,5 +627,10 @@
   "src": "images/burden-weiss.png",
   "tags": ["newest"],
   "type": "current"
+},
+{
+  "src": "images/fomo.png",
+  "tags": ["newest"],
+  "type": "current"
 }
 ]
