@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO Metadata -->
+  <title>Roger Link - Maker and Software Engineer</title>
+  <meta name="description" content="Roger Link - maker and software engineer creating immersive digital and physical experiences." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://rogerlink.com/" />
+
+  <!-- Open Graph Metadata (for better sharing previews) -->
+  <meta property="og:title" content="Roger Link - Maker and Software Engineer" />
+  <meta property="og:description" content="Explore the portfolio and creative work of Roger Link." />
+  <meta property="og:url" content="https://rogerlink.com/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://rogerlink.com/images/me.jpg" />
+
+  <!-- Twitter Card Metadata -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Roger Link - Maker and Software Engineer" />
+  <meta name="twitter:description" content="Explore the portfolio and creative work of Roger Link." />
+  <meta name="twitter:image" content="https://rogerlink.com/images/me.jpg" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Roger Link",
+    "url": "https://rogerlink.com/",
+    "sameAs": [
+      "https://www.linkedin.com/in/rogerlink/",
+      "https://cancelledfutures.bandcamp.com/album/asdf"
+    ],
+    "jobTitle": "Maker and Software Engineer"
+  }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .name {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 7vw;
+      font-weight: 600;
+      color: #fff;
+      z-index: 3;
+      text-shadow: 0 0 1px rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.25);
+    }
+
+    .nav {
+      position: fixed;
+      top: 20px;
+      right: 30px;
+      z-index: 4;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .nav a {
+      color: #e8d6ff;
+      text-decoration: none;
+      padding: 6px 12px;
+      background: rgba(0,0,0,.3);
+      border-radius: 4px;
+      transition: background .3s ease;
+    }
+
+    .nav a:hover {
+      background: rgba(255,255,255,.1);
+    }
+
+    @media (max-width: 600px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-end;
+        right: 15px;
+        top: 15px;
+        gap: 4px;
+      }
+
+      .nav a {
+        font-size: 0.9em;
+        padding: 4px 8px;
+      }
+    }
+
+    .portfolio {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,.9);
+      overflow: auto;
+      z-index: 20;
+      padding: 60px 5vw 40px;
+      box-sizing: border-box;
+    }
+
+    .portfolio .close {
+      position: fixed;
+      top: 20px;
+      right: 30px;
+      font-size: 2em;
+      color: #e8d6ff;
+      cursor: pointer;
+      z-index: 21;
+    }
+
+    .portfolio h3 {
+      color: #e8d6ff;
+      text-align: center;
+      margin: 0;
+    }
+
+    .portfolio-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .portfolio-filters {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .portfolio-filter {
+      color: #e8d6ff;
+      font: inherit;
+      font-size: 0.95rem;
+      padding: 6px 12px;
+      background: rgba(0,0,0,.35);
+      border: 1px solid rgba(232,214,255,.25);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background .2s ease, border-color .2s ease, color .2s ease;
+    }
+
+    .portfolio-filter:hover,
+    .portfolio-filter[aria-pressed="true"] {
+      color: #fff;
+      background: rgba(232,214,255,.16);
+      border-color: rgba(232,214,255,.7);
+    }
+
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+    }
+
+    .image-grid img {
+      width: 100%;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .image-grid img:hover {
+      transform: scale(1.05);
+    }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,.9);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 12px;
+    }
+
+    .shape {
+      position: absolute;
+      will-change: transform;
+    }
+
+    .abstract {
+      overflow: hidden;
+      transition: clip-path 6s ease-in-out;
+      box-sizing: border-box;
+    }
+
+    .rotate {
+      animation: spin 240s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .inner-shape {
+      position: absolute;
+      pointer-events: none;
+    }
+
+    @media (max-width: 600px) {
+      .image-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 12px;
+      }
+
+      .portfolio {
+        padding: 40px 4vw 30px;
+      }
+
+      .portfolio h3 {
+        font-size: 1.2em;
+      }
+
+      .portfolio-header {
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+
+      .portfolio-filter {
+        font-size: 0.85rem;
+        padding: 5px 9px;
+      }
+    }
+
+    .image-grid img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .portfolio {
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+
+    .image-grid {
+      grid-template-columns: repeat(auto-fit, minmax(clamp(120px, 25%, 180px), 1fr));
+    }
+
+    .lightbox-close {
+      position: fixed;
+      top: 20px;
+      right: 30px;
+      font-size: 2em;
+      color: #e8d6ff;
+      cursor: pointer;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+  <div class="grid-bg" id="grid"></div>
+  <div class="name">Roger Link</div>
+  <div class="nav">
+    <a href="#" id="showPortfolio">Portfolio</a>
+    <a href="/bio.html">Bio</a>
+    <a href="https://cancelledfutures.bandcamp.com/album/asdf" target="_blank">Cancelled Futures</a>
+  </div>
+
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-close" id="lightboxClose">&times;</div>
+    <img src="" alt="">
+  </div>
+  <div class="portfolio" id="portfolio">
+    <div class="close" id="closePortfolio">&times;</div>
+    <div class="portfolio-header">
+      <h3>Portfolio</h3>
+      <div class="portfolio-filters" id="portfolioFilters" aria-label="Portfolio filters"></div>
+    </div>
+    <div class="image-grid" id="imageGrid"></div>
+  </div>
+
+  <script>
+    const PORTFOLIO_PARAM = 'filter';
+
+    function getFilterFromURL() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(PORTFOLIO_PARAM);
+    }
+
+    function setFilterInURL(type) {
+      const url = new URL(window.location.href);
+      if (type === 'all') {
+        url.searchParams.delete(PORTFOLIO_PARAM);
+      } else {
+        url.searchParams.set(PORTFOLIO_PARAM, type);
+      }
+      history.replaceState(null, '', url.toString());
+    }
+
+    document.getElementById('showPortfolio').onclick = e => {
+      e.preventDefault();
+      activeType = 'current';
+      setFilterInURL(activeType);
+      renderFilters();
+      renderPortfolio();
+      document.getElementById('portfolio').style.display = 'block';
+    };
+    document.getElementById('closePortfolio').onclick = () => {
+      document.getElementById('portfolio').style.display = 'none';
+      setFilterInURL('all');
+    };
+    document.getElementById('lightbox').onclick = () => {
+      document.getElementById('lightbox').style.display = 'none';
+    };
+    document.getElementById('lightboxClose').onclick = () => {
+      document.getElementById('lightbox').style.display = 'none';
+    };
+
+    const typeLabels = {
+      all: 'All',
+      current: 'Current',
+      drawing: 'Drawing',
+      digital: 'Digital'
+    };
+
+    let portfolioItems = [];
+    let activeType = 'all';
+    const urlFilter = getFilterFromURL();
+    if (urlFilter && Object.prototype.hasOwnProperty.call(typeLabels, urlFilter)) {
+      activeType = urlFilter;
+    }
+
+
+    function renderFilters() {
+      const filters = document.getElementById('portfolioFilters');
+      filters.innerHTML = '';
+      Object.entries(typeLabels).forEach(([type, label]) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'portfolio-filter';
+        button.textContent = label;
+        button.setAttribute('aria-pressed', type === activeType ? 'true' : 'false');
+        button.onclick = () => {
+          activeType = type;
+          setFilterInURL(type);
+          renderFilters();
+          renderPortfolio();
+        };
+        filters.appendChild(button);
+      });
+    }
+
+    function renderPortfolio() {
+      const grid = document.getElementById('imageGrid');
+      grid.innerHTML = '';
+      const visibleItems = activeType === 'all'
+        ? portfolioItems
+        : portfolioItems.filter(item => item.type === activeType);
+
+      visibleItems.forEach(item => {
+        const img = document.createElement('img');
+        img.src = item.src;
+        img.alt = `${typeLabels[item.type] || 'Portfolio'} work by Roger Link`;
+        img.loading = 'lazy';
+        img.onclick = () => {
+          document.querySelector('#lightbox img').src = item.src;
+          document.getElementById('lightbox').style.display = 'flex';
+        };
+        document.getElementById('imageGrid').appendChild(img);
+      });
+    }
+
+    fetch('data/portfolio.json?v=portfolio-types-1', { cache: 'no-store' })
+      .then(response => response.json())
+      .then(items => {
+        portfolioItems = items;
+        renderFilters();
+        renderPortfolio();
+        if (urlFilter && Object.prototype.hasOwnProperty.call(typeLabels, urlFilter)) {
+          document.getElementById('portfolio').style.display = 'block';
+        }
+      })
+      .catch(() => {
+        document.getElementById('imageGrid').innerHTML = '<p style="color:#e8d6ff;text-align:center;grid-column:1/-1;">Portfolio images could not be loaded.</p>';
+      });
+
+    const grid = document.getElementById('grid'),
+          W = window.innerWidth,
+          H = window.innerHeight,
+          palette = ['#e63946','#f1a208','#ffb703','#fb8500','#43aa8b','#219ebc','#3a86ff','#8338ec','#ff006e','#d62828','#6a994e','#386641','#1d3557','#2a9d8f','#264653'];
+
+    function randomColor() {
+      return palette[Math.random() * palette.length | 0];
+    }
+
+    function createShape() {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'shape';
+      wrapper.style.position = 'absolute';
+      wrapper.style.left = Math.random() * W + 'px';
+      wrapper.style.top = Math.random() * H + 'px';
+      wrapper.style.willChange = 'transform, opacity';
+      wrapper.style.display = 'flex';
+      wrapper.style.alignItems = 'center';
+      wrapper.style.justifyContent = 'center';
+
+      const s = document.createElement('div');
+      s.className = 'abstract';
+      const size = Math.random() < 0.1 ? 350 + Math.random() * 300 : 30 + Math.random() * 180;
+      s.style.width = `${size}px`;
+      s.style.height = `${size}px`;
+      s.style.boxSizing = 'border-box';
+
+      const backgroundIsGradient = Math.random() < 0.35;
+      if (backgroundIsGradient) {
+        s.style.background = `repeating-linear-gradient(${Math.random() * 360}deg, ${randomColor()} 0, ${randomColor()} ${3 + Math.random() * 8}px, transparent ${8 + Math.random() * 12}px)`;
+      } else {
+        s.style.background = randomColor();
+      }
+
+      const shapeTypeChance = Math.random();
+      if (shapeTypeChance < 0.33) {
+        s.style.clipPath = 'circle(50%)';
+      } else if (shapeTypeChance < 0.66) {
+        s.style.clipPath = 'polygon(50% 0%, 0% 100%, 100% 100%)';
+      } else {
+        s.style.clipPath = 'none';
+      }
+
+      const borderColor = randomColor();
+      if (Math.random() < 0.5) {
+        wrapper.style.border = `2px solid ${borderColor}`;
+        if (s.style.clipPath === 'circle(50%)') {
+          wrapper.style.borderRadius = '50%';
+        } else if (s.style.clipPath.startsWith('polygon')) {
+          wrapper.style.clipPath = s.style.clipPath;
+        } else {
+          wrapper.style.borderRadius = '0';
+        }
+      }
+
+      if (Math.random() < 0.05) {
+        s.classList.add('rotate');
+      }
+
+      if (Math.random() < 0.07) {
+        const innerCount = 3 + Math.floor(Math.random() * 6);
+        for (let i = 0; i < innerCount; i++) {
+          const is = document.createElement('div');
+          is.className = 'inner-shape';
+          const isize = size * (0.15 + Math.random() * 0.25);
+          is.style.width = `${isize}px`;
+          is.style.height = `${isize}px`;
+          is.style.background = randomColor();
+          is.style.left = Math.random() * 70 + '%';
+          is.style.top = Math.random() * 70 + '%';
+          s.appendChild(is);
+        }
+      }
+
+      wrapper.appendChild(s);
+      grid.appendChild(wrapper);
+
+      setTimeout(() => {
+        wrapper.style.transition = 'opacity 4s';
+        wrapper.style.opacity = 0;
+      }, 36000);
+
+      setTimeout(() => {
+        wrapper.remove();
+      }, 40000);
+
+      const freq = 0.3 + Math.random() * 0.5;
+      const amp = 15 + Math.random() * 20;
+      const ox = Math.random() * 1000;
+      const oy = Math.random() * 1000;
+
+      function animate() {
+        const t = performance.now() / 1000;
+        wrapper.style.transform = `translate(${Math.sin(t * freq + ox) * amp}px, ${Math.cos(t * freq + oy) * amp}px)`;
+        requestAnimationFrame(animate);
+      }
+
+      animate();
+    }
+
+    function createLine() {
+      const w = document.createElement('div');
+      w.className = 'shape';
+      w.style.left = Math.random() * W + 'px';
+      w.style.top = Math.random() * H + 'px';
+      w.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+      const l = document.createElement('div');
+      l.style.width = 50 + Math.random() * 400 + 'px';
+      l.style.height = 1 + Math.random() * 8 + 'px';
+      l.style.background = randomColor();
+
+      w.appendChild(l);
+      grid.appendChild(w);
+      setTimeout(() => w.remove(), 30000);
+    }
+
+    for (let i = 0; i < 60; i++) createShape();
+    for (let i = 0; i < 30; i++) createLine();
+    setInterval(createShape, 2000);
+    setInterval(createLine, 2500);
+  </script>
+  <a href="/about.html" style="display:none;">About Roger Link</a>
+</body>
+</html>
