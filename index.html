@@ -762,6 +762,9 @@ float totalDisp(vec3 p, float t, float uScale, float uAmp, float uWaveAmp) {
     composer.addPass(tripPass);
 
     const clock = new THREE.Clock();
+    // re-rolled on every page load so the color drift below starts at a different point in
+    // its cycle each time, instead of always opening on the same mix
+    const colorPhaseOffset = Math.random() * 1000;
     const baseAmp = sharedUniforms.uAmp.value;
     const basePulse = sharedUniforms.uPulseFreq.value;
     const baseWaveAmp = sharedUniforms.uWaveAmp.value;
@@ -801,14 +804,15 @@ float totalDisp(vec3 p, float t, float uScale, float uAmp, float uWaveAmp) {
       tripPass.uniforms.uTime.value = t;
       tripPass.uniforms.uAberration.value = 0.0022 + escalation * 0.0022 + throb * 0.0008 + flinch * 0.006;
 
+      const tc = t + colorPhaseOffset;
       sharedUniforms.uHueShift.value =
-        0.26 * Math.sin(t * 0.09) +
-        0.14 * Math.sin(t * 0.033 + 2.0) +
-        0.08 * Math.sin(t * 0.21 + 5.0) +
+        0.26 * Math.sin(tc * 0.09) +
+        0.14 * Math.sin(tc * 0.033 + 2.0) +
+        0.08 * Math.sin(tc * 0.21 + 5.0) +
         flinch * 0.4;
       sharedUniforms.uSatShift.value =
-        0.28 * Math.sin(t * 0.05 + 1.0) + 0.15 * Math.sin(t * 0.13 + 4.0) + flinch * 0.3;
-      sharedUniforms.uValShift.value = 0.12 * Math.sin(t * 0.037 + 2.5) + flinch * 0.2;
+        0.28 * Math.sin(tc * 0.05 + 1.0) + 0.15 * Math.sin(tc * 0.13 + 4.0) + flinch * 0.3;
+      sharedUniforms.uValShift.value = 0.12 * Math.sin(tc * 0.037 + 2.5) + flinch * 0.2;
 
       composer.render();
     });
