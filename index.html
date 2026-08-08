@@ -92,6 +92,10 @@
       background: rgba(0,0,0,.3);
       border-radius: 4px;
       transition: background .3s ease;
+      /* explicit — Space Grotesk isn't loaded at 400, so an unset weight here was silently
+         getting matched to the nearest loaded weight (~500), while the name mark next to it
+         requested 600 or 300. Same family, different actual weights rendered. */
+      font-weight: 500;
     }
 
     .nav a:hover {
@@ -265,23 +269,23 @@
       z-index: 3;
     }
 
-    /* ---------- variant: yesterday (bold Space Grotesk name, matches the committed look) ---------- */
+    /* ---------- variant: yesterday (matches the committed look, weight aligned to nav) ---------- */
     .name {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 1.1rem;
-      font-weight: 600;
+      font-weight: 500;
       color: #fff;
       text-shadow: 0 0 1px rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.25);
     }
 
-    /* ---------- variant: today (letter-spaced uppercase name, on-brand font) ---------- */
+    /* ---------- variant: today (same weight/case as nav — was uppercase + thin + wide
+       letter-spacing, which read as a different typeface sitting right next to the nav) ---------- */
     .site-name {
       color: #ffffff;
       font-family: 'Space Grotesk', sans-serif;
-      font-weight: 300;
-      letter-spacing: 0.22em;
-      font-size: 0.85rem;
-      text-transform: uppercase;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      font-size: 1.1rem;
       text-shadow: 0 0 24px rgba(0, 0, 0, 0.55), 0 0 4px rgba(0, 0, 0, 0.5);
     }
   </style>
