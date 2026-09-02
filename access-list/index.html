@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Access List</title>
+    <meta name="description" content="A directory of free-entry access opportunities for scarce tickets and products at retail or face value.">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav" aria-label="Primary">
+        <a class="brand" href="#top" aria-label="Access List home">
+          <span class="brand-mark">AL</span>
+          <span>Access List</span>
+        </a>
+        <div class="nav-links">
+          <a href="#opportunities">Browse</a>
+          <a href="#types">Access types</a>
+          <a href="#submit">Submit</a>
+        </div>
+      </nav>
+
+      <section class="hero" id="top">
+        <div class="hero-copy">
+          <p class="eyebrow">Free-entry purchase access directory</p>
+          <h1>Find scarce tickets and products you can try to buy at face value.</h1>
+          <p class="lede">
+            Track official lotteries, ballots, drawings, reservations, waitlists, and first-come releases.
+            No paid-entry gambling, no prize sweepstakes positioning, and every listing points back to an official source.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#opportunities">Browse opportunities</a>
+            <a class="button secondary" href="#types">Compare access types</a>
+          </div>
+        </div>
+        <aside class="hero-panel" aria-label="Directory standards">
+          <div class="metric">
+            <span class="metric-value">Free</span>
+            <span class="metric-label">to enter unless stated otherwise</span>
+          </div>
+          <div class="metric">
+            <span class="metric-value">Official</span>
+            <span class="metric-label">source link required</span>
+          </div>
+          <div class="metric">
+            <span class="metric-value">Retail</span>
+            <span class="metric-label">or face-value purchase access</span>
+          </div>
+        </aside>
+      </section>
+    </header>
+
+    <main>
+      <section class="section intro-grid" aria-label="Directory positioning">
+        <article>
+          <h2>What belongs here</h2>
+          <p>
+            Access List is for opportunities where a free entry, sign-up, or timed action gives people a fair shot
+            to purchase scarce inventory at retail or face value.
+          </p>
+        </article>
+        <article>
+          <h2>What does not</h2>
+          <p>
+            Paid-entry contests, casino-style gambling, prize-only giveaways, unclear third-party raffles, and listings
+            without an official source are out of scope.
+          </p>
+        </article>
+      </section>
+
+      <section class="section type-section" id="types">
+        <div class="section-heading">
+          <p class="eyebrow">Clear labels</p>
+          <h2>Access types</h2>
+        </div>
+        <div class="type-grid">
+          <article class="type-card">
+            <span class="type-icon">#</span>
+            <h3>Purchase lottery</h3>
+            <p>Free entry selects people who can buy a scarce ticket or product at the stated price.</p>
+          </article>
+          <article class="type-card">
+            <span class="type-icon">?</span>
+            <h3>Prize giveaway</h3>
+            <p>Free entry may award an item or experience. These are labeled separately and are not the core directory focus.</p>
+          </article>
+          <article class="type-card">
+            <span class="type-icon">≡</span>
+            <h3>Waitlist or reservation</h3>
+            <p>Users join a queue, request allocation, or reserve purchase access when inventory opens.</p>
+          </article>
+          <article class="type-card">
+            <span class="type-icon">→</span>
+            <h3>First-come access</h3>
+            <p>Inventory opens at a known time without a drawing. Speed and eligibility usually matter.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section browse-section" id="opportunities">
+        <div class="section-heading">
+          <p class="eyebrow">Sample MVP data</p>
+          <h2>Opportunities</h2>
+          <p class="section-note">These examples show the intended structure. Confirm current dates, eligibility, and terms at the official source before entering.</p>
+        </div>
+
+        <div class="filters" aria-label="Opportunity filters">
+          <label>
+            <span>Search</span>
+            <input id="searchInput" type="search" placeholder="Event, brand, category, region">
+          </label>
+
+          <label>
+            <span>Category</span>
+            <select id="categoryFilter">
+              <option value="all">All categories</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Access type</span>
+            <select id="typeFilter">
+              <option value="all">All access types</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Region</span>
+            <select id="regionFilter">
+              <option value="all">All regions</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="result-bar">
+          <p id="resultCount">Showing opportunities</p>
+          <button class="reset-button" id="resetFilters" type="button">Reset filters</button>
+        </div>
+
+        <div class="card-grid" id="opportunityGrid" aria-live="polite"></div>
+      </section>
+
+      <section class="section submit-section" id="submit">
+        <div>
+          <p class="eyebrow">Keep it useful</p>
+          <h2>Listing checklist</h2>
+        </div>
+        <ul class="checklist">
+          <li>Entry is free, or the cost is clearly disclosed.</li>
+          <li>The user is seeking access to purchase at retail or face value.</li>
+          <li>The official source link is visible and trustworthy.</li>
+          <li>The access type is labeled without implying a prize or guaranteed purchase.</li>
+          <li>Region, eligibility, open date, close date, and price are easy to scan.</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Access List is an independent directory concept. Always verify details with the official source.</p>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
