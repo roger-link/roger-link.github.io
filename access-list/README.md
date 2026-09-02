@@ -2,9 +2,9 @@
 
 A simple GitHub Pages MVP for a directory of free-entry lotteries, ballots, drawings, reservations, waitlists, and first-come releases that provide access to buy scarce tickets or products at retail or face value.
 
-## Edit listings
+## Edit approved listings
 
-Listings live in `data.js`.
+Approved listings live in `data/opportunities.json`.
 
 Each listing supports:
 
@@ -37,3 +37,15 @@ This site is static and has no build step. Deploy from the repository root on th
 - Prefer official sources.
 - Do not imply users will win or receive a product for free.
 - Verify current dates, eligibility, pricing, and terms before publishing live listings.
+
+## Scraper candidates
+
+Scraper output lives in `data/candidates.json`. Candidate entries are not shown on the public page until they are reviewed and copied into `data/opportunities.json`.
+
+Run all scrapers locally with:
+
+```sh
+node scripts/scrape-all.mjs
+```
+
+GitHub Actions also runs the scraper workflow weekly and opens a pull request when `data/candidates.json` changes.

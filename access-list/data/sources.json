@@ -1,0 +1,16 @@
+[
+  {
+    "id": "nike-snkrs",
+    "name": "Nike SNKRS Launch Calendar",
+    "url": "https://www.nike.com/launch",
+    "category": "Sneakers",
+    "sourceReliability": "official",
+    "scrapeStatus": "scrape",
+    "accessTypes": [
+      "Purchase lottery",
+      "First-come access",
+      "Exclusive access"
+    ],
+    "notes": "Scrape the launch index for product candidates. Individual product pages may be needed to classify the exact access type."
+  }
+]

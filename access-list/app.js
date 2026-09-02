@@ -1,4 +1,4 @@
-const opportunities = window.OPPORTUNITIES || [];
+let opportunities = [];
 
 const els = {
   grid: document.querySelector("#opportunityGrid"),
@@ -21,6 +21,8 @@ function uniqueOptions(key) {
 }
 
 function fillSelect(select, values) {
+  select.querySelectorAll("option:not([value='all'])").forEach((option) => option.remove());
+
   values.forEach((value) => {
     const option = document.createElement("option");
     option.value = value;
@@ -99,14 +101,31 @@ function resetFilters() {
   render();
 }
 
-fillSelect(els.category, uniqueOptions("category"));
-fillSelect(els.type, uniqueOptions("accessType"));
-fillSelect(els.region, uniqueOptions("region"));
-
 [els.search, els.category, els.type, els.region].forEach((el) => {
   el.addEventListener("input", render);
 });
 
 els.reset.addEventListener("click", resetFilters);
 
-render();
+async function loadOpportunities() {
+  try {
+    const response = await fetch("data/opportunities.json", { cache: "no-store" });
+
+    if (!response.ok) {
+      throw new Error(`Could not load opportunities: ${response.status}`);
+    }
+
+    opportunities = await response.json();
+
+    fillSelect(els.category, uniqueOptions("category"));
+    fillSelect(els.type, uniqueOptions("accessType"));
+    fillSelect(els.region, uniqueOptions("region"));
+    render();
+  } catch (error) {
+    els.count.textContent = "Could not load opportunities";
+    els.grid.innerHTML = `<div class="empty-state">Opportunity data is unavailable right now. Check the data file and try again.</div>`;
+    console.error(error);
+  }
+}
+
+loadOpportunities();

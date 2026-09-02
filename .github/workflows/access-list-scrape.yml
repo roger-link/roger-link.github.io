@@ -1,0 +1,40 @@
+name: Access List Scrape
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "24 15 * * 1"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run scrapers
+        run: node access-list/scripts/scrape-all.mjs
+
+      - name: Open candidate update PR
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "Update access-list candidates"
+          title: "Update access-list candidates"
+          body: |
+            Automated scraper output for Access List.
+
+            Review `access-list/data/candidates.json` before moving any entries into `access-list/data/opportunities.json`.
+          branch: access-list-candidates
+          delete-branch: true
+          add-paths: |
+            access-list/data/candidates.json
