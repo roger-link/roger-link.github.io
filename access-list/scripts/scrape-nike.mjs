@@ -77,7 +77,7 @@ export async function scrapeNikeLaunch(fetchImpl = fetch) {
       title,
       category: "Sneakers",
       accessType: classifyAccessType(html.slice(Math.max(0, match.index - 500), match.index + 500)),
-      status: "Candidate",
+      status: "Auto-imported",
       region: "US",
       price: "Needs review",
       opens: "Needs review",
@@ -87,7 +87,7 @@ export async function scrapeNikeLaunch(fetchImpl = fetch) {
       sourceReliability: "official",
       scrapeStatus: "scrape",
       lastVerified: verifiedAt,
-      summary: "Candidate from Nike SNKRS launch calendar. Review product page for retail price, launch date, and access mechanic before publishing."
+      summary: "Auto-imported from Nike SNKRS launch calendar. Product page may contain retail price, launch date, and access mechanic details."
     });
   }
 

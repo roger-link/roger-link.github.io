@@ -38,9 +38,9 @@ This site is static and has no build step. Deploy from the repository root on th
 - Do not imply users will win or receive a product for free.
 - Verify current dates, eligibility, pricing, and terms before publishing live listings.
 
-## Scraper candidates
+## Scraper updates
 
-Scraper output lives in `data/candidates.json`. Candidate entries are not shown on the public page until they are reviewed and copied into `data/opportunities.json`.
+Scraper output lives in `data/candidates.json`. The scraper also publishes auto-imported entries into `data/opportunities.json`, which means those entries appear on the public page without manual review.
 
 Run all scrapers locally with:
 
@@ -48,4 +48,4 @@ Run all scrapers locally with:
 node scripts/scrape-all.mjs
 ```
 
-GitHub Actions also runs the scraper workflow weekly and opens a pull request when `data/candidates.json` changes.
+GitHub Actions also runs the scraper workflow weekly and commits changes when `data/candidates.json` or `data/opportunities.json` changes.
