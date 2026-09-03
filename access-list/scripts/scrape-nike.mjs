@@ -86,6 +86,8 @@ export async function scrapeNikeLaunch(fetchImpl = fetch) {
       sourceName: "Nike SNKRS Launch Calendar",
       sourceReliability: "official",
       scrapeStatus: "scrape",
+      resalePotential: "Active resale market",
+      resalePolicy: "Purchase-for-resale may be restricted",
       lastVerified: verifiedAt,
       summary: "Auto-imported from Nike SNKRS launch calendar. Product page may contain retail price, launch date, and access mechanic details."
     });

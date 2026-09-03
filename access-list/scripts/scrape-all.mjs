@@ -1,24 +1,12 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { scrapeHadestownLottery } from "./scrape-hadestown.mjs";
-import { scrapeHamiltonLottery } from "./scrape-hamilton.mjs";
-import { scrapeHarryPotterLottery } from "./scrape-harry-potter.mjs";
 import { scrapeNikeLaunch } from "./scrape-nike.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const dataDir = resolve(__dirname, "../data");
 const candidatesPath = resolve(dataDir, "candidates.json");
 const opportunitiesPath = resolve(dataDir, "opportunities.json");
-
-async function readJson(path, fallback) {
-  try {
-    return JSON.parse(await readFile(path, "utf8"));
-  } catch (error) {
-    if (error.code === "ENOENT") return fallback;
-    throw error;
-  }
-}
 
 function mergeCandidates(existing, incoming) {
   const incomingSources = new Set(incoming.map((item) => item.sourceName));
@@ -51,14 +39,10 @@ async function runScraper(name, scraper) {
 }
 
 async function main() {
-  const existing = await readJson(candidatesPath, []);
   const incoming = [
-    ...await runScraper("Hadestown", scrapeHadestownLottery),
-    ...await runScraper("Hamilton", scrapeHamiltonLottery),
-    ...await runScraper("Harry Potter", scrapeHarryPotterLottery),
     ...await runScraper("Nike", scrapeNikeLaunch)
   ];
-  const candidates = mergeCandidates(existing, incoming);
+  const candidates = mergeCandidates([], incoming);
   const published = mergeCandidates([], incoming);
 
   await mkdir(dataDir, { recursive: true });

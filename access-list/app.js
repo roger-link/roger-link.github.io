@@ -39,7 +39,9 @@ function matchesFilters(item) {
     item.accessType,
     item.region,
     item.summary,
-    item.status
+    item.status,
+    item.resalePotential,
+    item.resalePolicy
   ].join(" "));
 
   return (!search || searchable.includes(search)) &&
@@ -65,6 +67,7 @@ function cardTemplate(item) {
         <div class="card-meta">
           <span class="pill ${pillClass(item.accessType)}">${item.accessType}</span>
           <span class="pill neutral">${item.category}</span>
+          <span class="pill resale">${item.resalePotential || "Resale potential required"}</span>
           <span class="pill neutral">${item.status}</span>
         </div>
         <h3>${item.title}</h3>
@@ -72,6 +75,7 @@ function cardTemplate(item) {
         <div class="details">
           <div class="detail"><span>Region</span><strong>${item.region}</strong></div>
           <div class="detail"><span>Price</span><strong>${item.price}</strong></div>
+          <div class="detail"><span>Resale</span><strong>${item.resalePolicy || "Verify terms"}</strong></div>
           <div class="detail"><span>Opens</span><strong>${item.opens}</strong></div>
           <div class="detail"><span>Closes</span><strong>${item.closes}</strong></div>
         </div>

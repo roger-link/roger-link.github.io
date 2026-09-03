@@ -405,6 +405,11 @@ select {
   color: #43515b;
 }
 
+.pill.resale {
+  background: #eef7e7;
+  color: #315e2a;
+}
+
 .details {
   display: grid;
   gap: 10px;

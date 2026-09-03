@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Access List</title>
-    <meta name="description" content="A directory of free-entry access opportunities for scarce tickets and products at retail or face value.">
+    <meta name="description" content="A directory of free-entry access opportunities for scarce products with active resale markets.">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
@@ -23,11 +23,12 @@
 
       <section class="hero" id="top">
         <div class="hero-copy">
-          <p class="eyebrow">Free-entry purchase access directory</p>
-          <h1>Find scarce tickets and products you can try to buy at face value.</h1>
+          <p class="eyebrow">Free-entry resale access directory</p>
+          <h1>Find scarce products with active resale markets.</h1>
           <p class="lede">
-            Track official lotteries, ballots, drawings, reservations, waitlists, and first-come releases.
-            No paid-entry gambling, no prize sweepstakes positioning, and every listing points back to an official source.
+            Track official lotteries, drawings, reservations, waitlists, and first-come releases for items
+            with real secondary-market demand. No paid-entry gambling, no prize sweepstakes positioning,
+            and no listings without a plausible resale path.
           </p>
           <div class="hero-actions">
             <a class="button primary" href="#opportunities">Browse opportunities</a>
@@ -44,8 +45,8 @@
             <span class="metric-label">source link required</span>
           </div>
           <div class="metric">
-            <span class="metric-value">Retail</span>
-            <span class="metric-label">or face-value purchase access</span>
+            <span class="metric-value">Resellable</span>
+            <span class="metric-label">active market required</span>
           </div>
         </aside>
       </section>
@@ -57,14 +58,15 @@
           <h2>What belongs here</h2>
           <p>
             Access List is for opportunities where a free entry, sign-up, or timed action gives people a fair shot
-            to purchase scarce inventory at retail or face value.
+            to purchase scarce inventory at retail or face value, and the item has a real secondary market.
           </p>
         </article>
         <article>
           <h2>What does not</h2>
           <p>
-            Paid-entry contests, casino-style gambling, prize-only giveaways, unclear third-party raffles, and listings
-            without an official source are out of scope.
+            Paid-entry contests, casino-style gambling, prize-only giveaways, non-transferable race entries,
+            personal-use event lotteries, unclear third-party raffles, and listings without an official source are out of scope.
+            Known resale restrictions should be flagged instead of hidden.
           </p>
         </article>
       </section>
@@ -78,12 +80,12 @@
           <article class="type-card">
             <span class="type-icon">#</span>
             <h3>Purchase lottery</h3>
-            <p>Free entry selects people who can buy a scarce ticket or product at the stated price.</p>
+            <p>Free entry selects people who can buy a scarce item at the stated price.</p>
           </article>
           <article class="type-card">
-            <span class="type-icon">?</span>
-            <h3>Prize giveaway</h3>
-            <p>Free entry may award an item or experience. These are labeled separately and are not the core directory focus.</p>
+            <span class="type-icon">x</span>
+            <h3>Excluded giveaways</h3>
+            <p>Prize-only giveaways and paid-entry contests stay out of the public feed.</p>
           </article>
           <article class="type-card">
             <span class="type-icon">≡</span>
@@ -100,9 +102,9 @@
 
       <section class="section browse-section" id="opportunities">
         <div class="section-heading">
-          <p class="eyebrow">Sample MVP data</p>
+          <p class="eyebrow">Scraper-generated data</p>
           <h2>Opportunities</h2>
-          <p class="section-note">These examples show the intended structure. Confirm current dates, eligibility, and terms at the official source before entering.</p>
+          <p class="section-note">Only scraper-generated listings with active resale markets appear here. Confirm current dates, eligibility, and resale terms at the official source before entering.</p>
         </div>
 
         <div class="filters" aria-label="Opportunity filters">
@@ -149,6 +151,8 @@
         <ul class="checklist">
           <li>Entry is free, or the cost is clearly disclosed.</li>
           <li>The user is seeking access to purchase at retail or face value.</li>
+          <li>The item has an active resale market and is not tied to one named participant.</li>
+          <li>Known resale restrictions are flagged clearly.</li>
           <li>The official source link is visible and trustworthy.</li>
           <li>The access type is labeled without implying a prize or guaranteed purchase.</li>
           <li>Region, eligibility, open date, close date, and price are easy to scan.</li>
