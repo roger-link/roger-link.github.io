@@ -1,4 +1,3 @@
-const DATA_VERSION = "2026-09-02-auto-publish-1";
 let opportunities = [];
 
 const els = {
@@ -110,7 +109,7 @@ els.reset.addEventListener("click", resetFilters);
 
 async function loadOpportunities() {
   try {
-    const response = await fetch(`data/opportunities.json?v=${DATA_VERSION}`, { cache: "reload" });
+    const response = await fetch(`data/opportunities.json?v=${Date.now()}`, { cache: "no-store" });
 
     if (!response.ok) {
       throw new Error(`Could not load opportunities: ${response.status}`);
