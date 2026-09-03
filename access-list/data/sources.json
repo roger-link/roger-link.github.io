@@ -1,5 +1,17 @@
 [
   {
+    "id": "hamilton-new-york",
+    "name": "Hamilton New York Tickets",
+    "url": "https://hamiltonmusical.com/new-york/tickets/#lottery",
+    "category": "Theater",
+    "sourceReliability": "official",
+    "scrapeStatus": "scrape",
+    "accessTypes": [
+      "Purchase lottery"
+    ],
+    "notes": "Official Hamilton Broadway ticket page with Ham4Ham lottery details."
+  },
+  {
     "id": "nike-snkrs",
     "name": "Nike SNKRS Launch Calendar",
     "url": "https://www.nike.com/launch",

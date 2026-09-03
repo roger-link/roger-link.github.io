@@ -1,6 +1,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { scrapeHamiltonLottery } from "./scrape-hamilton.mjs";
 import { scrapeNikeLaunch } from "./scrape-nike.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -45,12 +46,27 @@ function publishAutoImports(opportunities, incoming) {
   return mergeCandidates(retained, incoming);
 }
 
+async function runScraper(name, scraper) {
+  try {
+    const results = await scraper();
+    console.log(`${name}: ${results.length} candidates`);
+    return results;
+  } catch (error) {
+    console.warn(`${name}: skipped after error`);
+    console.warn(error.message);
+    return [];
+  }
+}
+
 async function main() {
   const existing = await readJson(candidatesPath, []);
   const opportunities = await readJson(opportunitiesPath, []);
-  const nikeCandidates = await scrapeNikeLaunch();
-  const candidates = mergeCandidates(existing, nikeCandidates);
-  const published = publishAutoImports(opportunities, nikeCandidates);
+  const incoming = [
+    ...await runScraper("Hamilton", scrapeHamiltonLottery),
+    ...await runScraper("Nike", scrapeNikeLaunch)
+  ];
+  const candidates = mergeCandidates(existing, incoming);
+  const published = publishAutoImports(opportunities, incoming);
 
   await mkdir(dataDir, { recursive: true });
   await writeFile(candidatesPath, `${JSON.stringify(candidates, null, 2)}\n`);

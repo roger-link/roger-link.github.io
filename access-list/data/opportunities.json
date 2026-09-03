@@ -17,6 +17,23 @@
     "summary": "App-based access for select adidas releases, often using draws or sign-ups for limited products."
   },
   {
+    "id": "hamilton-new-york-ham4ham-lottery",
+    "title": "Hamilton New York Ham4Ham Lottery",
+    "category": "Theater",
+    "accessType": "Purchase lottery",
+    "status": "Auto-imported",
+    "region": "New York, US",
+    "price": "$10 tickets",
+    "opens": "Weekly lottery; confirm current timing at the official source",
+    "closes": "See official source",
+    "officialSource": "https://hamiltonmusical.com/new-york/tickets/#lottery",
+    "sourceName": "Hamilton New York Tickets",
+    "sourceReliability": "official",
+    "scrapeStatus": "scrape",
+    "lastVerified": "2026-09-02",
+    "summary": "Official Hamilton lottery listing for the chance to buy limited Broadway tickets at the posted lottery price."
+  },
+  {
     "id": "masters-tickets",
     "title": "Masters Tournament Tickets",
     "category": "Tickets",

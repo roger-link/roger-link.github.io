@@ -49,3 +49,8 @@ node scripts/scrape-all.mjs
 ```
 
 GitHub Actions also runs the scraper workflow weekly and commits changes when `data/candidates.json` or `data/opportunities.json` changes.
+
+Current scraper sources:
+
+- Hamilton New York Tickets
+- Nike SNKRS Launch Calendar
