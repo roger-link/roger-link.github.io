@@ -36,16 +36,6 @@ function mergeCandidates(existing, incoming) {
   });
 }
 
-function publishAutoImports(opportunities, incoming) {
-  const incomingSources = new Set(incoming.map((item) => item.sourceName));
-  const retained = opportunities.filter((item) => {
-    const sameSource = incomingSources.has(item.sourceName);
-    return !(sameSource && item.status === "Auto-imported");
-  });
-
-  return mergeCandidates(retained, incoming);
-}
-
 async function runScraper(name, scraper) {
   try {
     const results = await scraper();
@@ -60,13 +50,12 @@ async function runScraper(name, scraper) {
 
 async function main() {
   const existing = await readJson(candidatesPath, []);
-  const opportunities = await readJson(opportunitiesPath, []);
   const incoming = [
     ...await runScraper("Hamilton", scrapeHamiltonLottery),
     ...await runScraper("Nike", scrapeNikeLaunch)
   ];
   const candidates = mergeCandidates(existing, incoming);
-  const published = publishAutoImports(opportunities, incoming);
+  const published = mergeCandidates([], incoming);
 
   await mkdir(dataDir, { recursive: true });
   await writeFile(candidatesPath, `${JSON.stringify(candidates, null, 2)}\n`);
