@@ -1,5 +1,22 @@
 [
   {
+    "id": "hadestown-broadway-digital-lottery",
+    "title": "Hadestown Broadway Digital Lottery",
+    "category": "Theater",
+    "accessType": "Purchase lottery",
+    "status": "Auto-imported",
+    "region": "New York, US",
+    "price": "$49 tickets",
+    "opens": "See official source",
+    "closes": "See official source",
+    "officialSource": "https://hadestownmusical.com/",
+    "sourceName": "Hadestown Broadway Official Site",
+    "sourceReliability": "official",
+    "scrapeStatus": "scrape",
+    "lastVerified": "2026-09-03",
+    "summary": "Official Hadestown Broadway listing for a digital lottery to buy limited discounted tickets through Lucky Seat: https://www.luckyseat.com/shows/hadestown-newyork."
+  },
+  {
     "id": "hamilton-new-york-ham4ham-lottery",
     "title": "Hamilton New York Ham4Ham Lottery",
     "category": "Theater",
@@ -15,6 +32,23 @@
     "scrapeStatus": "scrape",
     "lastVerified": "2026-09-03",
     "summary": "Official Hamilton lottery listing for the chance to buy limited Broadway tickets at the posted lottery price."
+  },
+  {
+    "id": "harry-potter-broadway-friday-forty",
+    "title": "Harry Potter and the Cursed Child Friday Forty",
+    "category": "Theater",
+    "accessType": "Purchase lottery",
+    "status": "Auto-imported",
+    "region": "New York, US",
+    "price": "$40 tickets",
+    "opens": "You can enter any Monday from 12:01am to Friday at 1:00pm EST.",
+    "closes": "Friday 1:00 PM ET",
+    "officialSource": "https://broadway.harrypottertheplay.com/friday-forty/",
+    "sourceName": "Harry Potter Broadway Friday Forty",
+    "sourceReliability": "official",
+    "scrapeStatus": "scrape",
+    "lastVerified": "2026-09-03",
+    "summary": "Official Broadway Friday Forty listing for the chance to buy a limited number of discounted Harry Potter and the Cursed Child tickets."
   },
   {
     "id": "nike-air-force-1-low-terror-squad-university-red-and-white",

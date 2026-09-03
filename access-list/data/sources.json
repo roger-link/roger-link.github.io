@@ -1,5 +1,17 @@
 [
   {
+    "id": "hadestown-broadway",
+    "name": "Hadestown Broadway Official Site",
+    "url": "https://hadestownmusical.com/",
+    "category": "Theater",
+    "sourceReliability": "official",
+    "scrapeStatus": "scrape",
+    "accessTypes": [
+      "Purchase lottery"
+    ],
+    "notes": "Official Hadestown Broadway site with digital lottery details and provider link."
+  },
+  {
     "id": "hamilton-new-york",
     "name": "Hamilton New York Tickets",
     "url": "https://hamiltonmusical.com/new-york/tickets/#lottery",
@@ -10,6 +22,18 @@
       "Purchase lottery"
     ],
     "notes": "Official Hamilton Broadway ticket page with Ham4Ham lottery details."
+  },
+  {
+    "id": "harry-potter-broadway",
+    "name": "Harry Potter Broadway Friday Forty",
+    "url": "https://broadway.harrypottertheplay.com/friday-forty/",
+    "category": "Theater",
+    "sourceReliability": "official",
+    "scrapeStatus": "scrape",
+    "accessTypes": [
+      "Purchase lottery"
+    ],
+    "notes": "Official Friday Forty page for discounted Broadway ticket lottery details."
   },
   {
     "id": "nike-snkrs",

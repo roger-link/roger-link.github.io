@@ -1,7 +1,9 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { scrapeHadestownLottery } from "./scrape-hadestown.mjs";
 import { scrapeHamiltonLottery } from "./scrape-hamilton.mjs";
+import { scrapeHarryPotterLottery } from "./scrape-harry-potter.mjs";
 import { scrapeNikeLaunch } from "./scrape-nike.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -51,7 +53,9 @@ async function runScraper(name, scraper) {
 async function main() {
   const existing = await readJson(candidatesPath, []);
   const incoming = [
+    ...await runScraper("Hadestown", scrapeHadestownLottery),
     ...await runScraper("Hamilton", scrapeHamiltonLottery),
+    ...await runScraper("Harry Potter", scrapeHarryPotterLottery),
     ...await runScraper("Nike", scrapeNikeLaunch)
   ];
   const candidates = mergeCandidates(existing, incoming);
