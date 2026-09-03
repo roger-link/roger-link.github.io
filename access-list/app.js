@@ -56,6 +56,7 @@ function pillClass(type) {
   if (type === "Waitlist") return "waitlist";
   if (type === "Reservation") return "reservation";
   if (type === "First-come access") return "first-come";
+  if (type === "Release calendar") return "release-calendar";
   return "neutral";
 }
 

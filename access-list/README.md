@@ -28,6 +28,7 @@ Keep the distinction clear:
 - `Waitlist`: users join a queue or interest list for future purchase access.
 - `Reservation`: users reserve purchase access for a future release.
 - `First-come access`: inventory opens at a known time without a random drawing.
+- `Release calendar`: official launch listing where the exact purchase mechanic should be confirmed at the source.
 
 ## GitHub Pages
 
@@ -58,3 +59,4 @@ GitHub Actions also runs the scraper workflow weekly and commits changes when `d
 Current scraper sources:
 
 - Nike SNKRS Launch Calendar
+- SNS Upcoming Releases

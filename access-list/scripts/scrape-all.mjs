@@ -2,6 +2,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { scrapeNikeLaunch } from "./scrape-nike.mjs";
+import { scrapeSnsUpcoming } from "./scrape-sns.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const dataDir = resolve(__dirname, "../data");
@@ -40,7 +41,8 @@ async function runScraper(name, scraper) {
 
 async function main() {
   const incoming = [
-    ...await runScraper("Nike", scrapeNikeLaunch)
+    ...await runScraper("Nike", scrapeNikeLaunch),
+    ...await runScraper("SNS", scrapeSnsUpcoming)
   ];
   const candidates = mergeCandidates([], incoming);
   const published = mergeCandidates([], incoming);

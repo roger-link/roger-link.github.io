@@ -47,7 +47,7 @@ function classifyAccessType(text) {
   if (normalized.includes("draw")) return "Purchase lottery";
   if (normalized.includes("exclusive access")) return "Exclusive access";
 
-  return "Needs review";
+  return "Release calendar";
 }
 
 export async function scrapeNikeLaunch(fetchImpl = fetch) {

@@ -12,5 +12,17 @@
       "Exclusive access"
     ],
     "notes": "Scrape the launch index for product candidates with active sneaker resale markets. Nike purchase terms may restrict buying with resale intent."
+  },
+  {
+    "id": "sns-upcoming-releases",
+    "name": "SNS Upcoming Releases",
+    "url": "https://us.sneakersnstuff.com/collections/upcoming-releases/",
+    "category": "Sneakers",
+    "sourceReliability": "official",
+    "scrapeStatus": "scrape",
+    "accessTypes": [
+      "First-come access"
+    ],
+    "notes": "Scrape the official Sneakersnstuff upcoming releases collection for limited sneaker releases with active resale markets."
   }
 ]

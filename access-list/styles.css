@@ -400,6 +400,11 @@ select {
   color: var(--amber);
 }
 
+.pill.release-calendar {
+  background: #ece8ff;
+  color: #4b3b88;
+}
+
 .pill.neutral {
   background: var(--soft);
   color: #43515b;
